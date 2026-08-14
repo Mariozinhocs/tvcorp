@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TvCorp Player</title>
+  <!-- Google Fonts para tipografia premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at top left, #100f2e, #03020b);
+      --font-title: 'Sora', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+      --primary: #7b61ff;
+      --primary-glow: rgba(123, 97, 255, 0.4);
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #ffffff;
+      --text-muted: #8b8a9f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg-gradient);
+      color: var(--text);
+      font-family: var(--font-body);
+    }
+
+    /* CONTAINER PRINCIPAL DO PLAYER */
+    #player-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* REPRODUTOR DE MÍDIAS (TELA CHEIA) */
+    .media-display {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+      border: none;
+      background: #000;
+    }
+
+    /* IFRAME DE SITES */
+    iframe.media-display {
+      background: #fff;
+    }
+
+    /* TELA DE PAREAMENTO (DESIGN GLASSMORPHIC PREMIUM) */
+    #pairing-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .pairing-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 3.5rem 2.5rem;
+      width: 100%;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    .logo-text {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #fff, #8b8a9f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .pairing-card h2 {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .pair-code {
+      font-family: var(--font-title);
+      font-size: 5rem;
+      font-weight: 800;
+      letter-spacing: 6px;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
+                   0 0 40px var(--primary-glow);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 0.8rem 2.5rem;
+      margin: 1rem 0;
+      user-select: all;
+    }
+
+    .instructions {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 500px;
+    }
+
+    .instructions strong {
+      color: #fff;
+    }
+
+    .status-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffa500;
+      box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
+      animation: pulse 1.5s infinite;
+    }
+
+    .status-indicator.connected {
+      background: #00ff66;
+      box-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+    }
+
+    /* OVERLAYS E ESTILOS AUXILIARES */
+    #overlay-info {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      z-index: 100;
+      color: var(--text-muted);
+      display: none; /* Exibe apenas em modo player */
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ANIMAÇÕES */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.6; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="player-container">
+    
+    <!-- Elementos de exibição de mídia -->
+    <img id="image-display" class="media-display" alt="Imagem do Player">
+    <video id="video-display" class="media-display" muted playsinline></video>
+    <iframe id="iframe-display" class="media-display" sandbox="allow-scripts allow-same-origin"></iframe>
+
+    <!-- Tela de pareamento -->
+    <div id="pairing-screen">
+      <div class="pairing-card">
+        <div class="logo-container">
+          <div class="logo-dot"></div>
+          <span class="logo-text">TvCorp</span>
+        </div>
+        <h2>PAREAR ESTA TELA</h2>
+        <div class="pair-code" id="pair-code-display">------</div>
+        <p class="instructions">
+          Acesse o painel do administrador em <strong>TvCorp Admin</strong> e insira o código acima para vincular esta TV.
+        </p>
+        <div class="status-text">
+          <span class="status-indicator" id="status-indicator"></span>
+          <span id="status-label">Conectando ao servidor...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indicador de reprodução ativa -->
+    <div id="overlay-info">
+      TvCorp Player | Tela Pareada
+    </div>
+
+  </div>
+
+  <!-- Biblioteca de cliente do Socket.io de CDN -->
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="player.js"></script>
+</body>
+</html>
