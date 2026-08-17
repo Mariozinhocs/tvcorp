@@ -59,6 +59,7 @@ Upload-FtpFile -localFile "$PSScriptRoot/index.html" -remoteUri "$baseUri/index.
 Upload-FtpFile -localFile "$PSScriptRoot/app.html" -remoteUri "$baseUri/app.html"
 Upload-FtpFile -localFile "$PSScriptRoot/login.html" -remoteUri "$baseUri/login.html"
 Upload-FtpFile -localFile "$PSScriptRoot/admin.html" -remoteUri "$baseUri/admin.html"
+Upload-FtpFile -localFile "$PSScriptRoot/help.html" -remoteUri "$baseUri/help.html"
 Upload-FtpFile -localFile "$PSScriptRoot/db_installer.php" -remoteUri "$baseUri/db_installer.php"
 
 # 3. Upload CSS
@@ -83,6 +84,7 @@ Upload-FtpFile -localFile "$PSScriptRoot/api/playlists.php" -remoteUri "$baseUri
 Upload-FtpFile -localFile "$PSScriptRoot/api/media.php" -remoteUri "$baseUri/api/media.php"
 Upload-FtpFile -localFile "$PSScriptRoot/api/mercadopago.php" -remoteUri "$baseUri/api/mercadopago.php"
 Upload-FtpFile -localFile "$PSScriptRoot/api/webhook.php" -remoteUri "$baseUri/api/webhook.php"
+Upload-FtpFile -localFile "$PSScriptRoot/api/admin.php" -remoteUri "$baseUri/api/admin.php"
 Upload-FtpFile -localFile "$PSScriptRoot/api/auth.php" -remoteUri "$baseUri/api/auth.php"
 
 # Upload API Subpastas
