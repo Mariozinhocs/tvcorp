@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de Ajuda & Tutoriais — TvCorp</title>
+  <meta name="description" content="Aprenda a instalar o player TvCorp em sua Smart TV ou TV Box, parear telas em 6 dígitos, montar playlists e gerenciar sua assinatura.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <style>
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: rgba(7, 11, 20, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover {
+      color: var(--primary-cyan);
+    }
+
+    .help-hero {
+      padding: 4rem 5% 3rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.12), transparent 70%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .help-hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .help-search-box {
+      max-width: 540px;
+      margin: 2rem auto 0;
+      position: relative;
+    }
+    .help-search-box input {
+      width: 100%;
+      padding: 16px 20px 16px 48px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-glow);
+      border-radius: 30px;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+    }
+    .help-search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary-cyan);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 5%;
+    }
+
+    .tutorials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 2rem;
+    }
+    .tutorial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+    .tutorial-card:hover {
+      border-color: var(--primary-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
+    }
+    .tutorial-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      background: rgba(123, 97, 255, 0.15);
+      color: var(--primary-purple);
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .steps-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+    }
+    .steps-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .steps-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--primary-cyan);
+      font-weight: 800;
+    }
+
+    .faq-section {
+      margin-top: 4rem;
+    }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      padding: 1.25rem 1.5rem;
+      background: none;
+      border: none;
+      text-align: left;
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-answer {
+      padding: 0 1.5rem 1.25rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      display: none;
+      line-height: 1.6;
+    }
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .support-cta {
+      margin-top: 4rem;
+      background: linear-gradient(135deg, rgba(123, 97, 255, 0.15), rgba(0, 242, 254, 0.15));
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2.5rem 5%;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR 360 -->
+  <nav class="navbar">
+    <a href="index.html" class="brand-logo">
+      <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="10" fill="url(#logoGrad)"/>
+        <rect x="8" y="10" width="24" height="17" rx="3" fill="#070b14" stroke="#00f2fe" stroke-width="2"/>
+        <path d="M14 31L26 31" stroke="#00f2fe" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M20 27L20 31" stroke="#00f2fe" stroke-width="2.5"/>
+        <polygon points="17,15.5 25,18.5 17,21.5" fill="#00f2fe"/>
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#00f2fe"/>
+            <stop offset="1" stop-color="#7b61ff"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span>TvCorp</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="help.html" style="color: var(--primary-cyan);">Tutoriais & Ajuda</a></li>
+      <li><a href="login.html">Entrar</a></li>
+      <li><a href="login.html?register=true" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">Testar Grátis 7 Dias</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="help-hero">
+    <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0,242,254,0.1); border: 1px solid var(--border-glow); color: var(--primary-cyan); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">
+      📚 Central de Conhecimento 360
+    </div>
+    <h1>Como podemos ajudar você hoje?</h1>
+    <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 680px; margin: 0 auto;">
+      Aprenda a instalar o player em qualquer Smart TV ou TV Box, parear dispositivos em segundos e gerenciar suas playlists corporativas.
+    </p>
+
+    <div class="help-search-box">
+      <span class="help-search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Pesquisar tutoriais, pareamento, Smart TVs..." onkeyup="filterTutorials()">
+    </div>
+  </section>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="container">
+    
+    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">🚀 Guias Rápidos de Instalação</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2rem;">Selecione o seu dispositivo para ver o passo a passo completo.</p>
+
+    <div class="tutorials-grid" id="tutorialsGrid">
+      
+      <!-- CARD 1 -->
+      <div class="tutorial-card">
+        <span class="tutorial-badge">Smart TVs & TV Box</span>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">1. Instalação do Player TvCorp</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Abra o navegador da sua Smart TV (Samsung Tizen, LG WebOS, Android TV, TCL, Philips) ou TV Box.</p>
+        <ul class="steps-list">
+          <li>Acesse a URL do Player: <code>tvcorp.hubdigital360.com/player/</code></li>
+          <li>Coloque o navegador da TV em Modo Tela Cheia (F11 se no PC).</li>
+          <li>Um código de pareamento de 6 dígitos surgirá na tela.</li>
+        </ul>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="tutorial-card">
+        <span class="tutorial-badge">Painel do Assinante</span>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">2. Pareamento em 6 Dígitos</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Conecte a TV ao seu painel em menos de 10 segundos sem precisar digitar senhas na TV.</p>
+        <ul class="steps-list">
+          <li>Acesse o <a href="app.html" style="color: var(--primary-cyan);">Painel do Assinante</a> e clique em <strong>Minhas Telas</strong>.</li>
+          <li>Clique no botão <strong>+ Conectar Nova Tela</strong>.</li>
+          <li>Digite o código de 6 dígitos exibido na TV e dê um nome (ex: Recepção).</li>
+        </ul>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="tutorial-card">
+        <span class="tutorial-badge">Gestão de Conteúdo</span>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">3. Criação de Playlists Reativas</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Monte a programação da sua TV corporativa misturando múltiplos formatos.</p>
+        <ul class="steps-list">
+          <li>Envie vídeos em MP4 e imagens em alta resolução.</li>
+          <li>Adicione widgets dinâmicos de <strong>Previsão do Tempo</strong> e <strong>Notícias RSS</strong>.</li>
+          <li>Vincule a Playlist desejada à tela correspondente.</li>
+        </ul>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="tutorial-card">
+        <span class="tutorial-badge">Financeiro & Assinaturas</span>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">4. Renovação & Pagamentos Mercado Pago</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Gerencie sua assinatura com aprovação instantânea 24 horas por dia.</p>
+        <ul class="steps-list">
+          <li>Acesse a aba <strong>Minha Assinatura & Faturas</strong> no painel.</li>
+          <li>Escolha entre ⚡ <strong>PIX Instantâneo</strong> (QR Code) ou 💳 <strong>Cartão de Crédito</strong>.</li>
+          <li>A liberação é automática imediatamente após a confirmação do pagamento.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- SEÇÃO FAQ -->
+    <div class="faq-section">
+      <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">❓ Perguntas Frequentes (FAQ)</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">Respostas diretas para as dúvidas mais comuns.</p>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          O TvCorp funciona em qualquer modelo de Smart TV?
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          Sim! O player TvCorp foi desenvolvido em HTML5 ultraleve e roda nativamente no navegador de Smart TVs Samsung (Tizen), LG (WebOS), Android TV, Google TV, Apple TV, Amazon Fire TV Stick, Xiaomi Mi Box ou minicomputadores conectados por HDMI.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          O que acontece se a internet da empresa cair?
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          O player TvCorp possui cache offline inteligente. A playlist carregada continua sendo exibida em loop contínuo mesmo que a conexão com a internet oscile ou caia temporariamente.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Como funciona o período de teste grátis de 7 dias?
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          Ao cadastrar sua conta, seu plano <strong>Trial Grátis de 7 Dias</strong> é ativado automaticamente com suporte a 1 tela completa. Não é necessário cadastrar cartão de crédito para testar.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Posso gerenciar múltiplas telas em locais ou filiais diferentes?
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          Com certeza! Pelo painel TvCorp você pode gerenciar dezenas de telas em filiais, escritórios ou lojas distintas, enviando conteúdos específicos ou unificados para cada grupo de telas em tempo real.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SUPPORT CTA -->
+    <div class="support-cta">
+      <h2 style="font-size: 2rem; margin-bottom: 0.75rem;">Ainda precisa de ajuda?</h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 1.5rem;">
+        Nossa equipe de suporte técnico está à disposição para auxiliar no pareamento das suas telas e configuração do ecossistema.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+        <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Preciso%20de%20suporte%20com%20o%20TvCorp." target="_blank" class="btn-primary" style="padding: 12px 28px;">💬 Falar no WhatsApp Suporte</a>
+        <a href="app.html" class="btn-secondary" style="padding: 12px 28px;">🖥️ Ir para o Painel do Assinante</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 TvCorp — Plataforma SaaS de TV Corporativa & Mídia Indoor. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+      if (!isOpen) {
+        item.classList.add('active');
+        btn.querySelector('span').innerText = '−';
+      } else {
+        btn.querySelector('span').innerText = '+';
+      }
+    }
+
+    function filterTutorials() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.tutorial-card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(query)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

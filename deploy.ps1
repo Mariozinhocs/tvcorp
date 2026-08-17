@@ -4,7 +4,7 @@
 $ftpServer = "ftp://ftp.tvcorp.hubdigital360.com"
 $username = "u576215103.tvcorp"
 $password = "I`$Ta4KJn8" # Escapando o caractere $ do PowerShell
-$remotePath = "/domains/tvcorp.hubdigital360.com/public_html" # Pasta base remota
+$remotePath = "" # A conta FTP já cai diretamente na pasta public_html
 
 # Função para criar diretório remoto no FTP
 function Create-FtpDirectory {
@@ -26,7 +26,6 @@ function Create-FtpDirectory {
         # Ignora se o diretório já existir
         $err = $_.Exception.Message
         if ($err -match "550") {
-            # 550 significa que o diretório já existe ou sem permissão
             Write-Host "Diretório já existe ou inacessível: $uri" -ForegroundColor Yellow
         } else {
             Write-Host "Erro ao criar diretório $uri : $err" -ForegroundColor Red
@@ -70,8 +69,13 @@ function Upload-FtpFile {
 # Execução do Deploy
 Write-Host "Iniciando deploy do TvCorp para $ftpServer..." -ForegroundColor Green
 
+# Normalizar caminhos de URI
+$baseUri = $ftpServer
+if ($remotePath -ne "") {
+    $baseUri = "$ftpServer$remotePath"
+}
+
 # 1. Criar estrutura de pastas remota
-$baseUri = "$ftpServer$remotePath"
 Create-FtpDirectory -uri "$baseUri/api"
 Create-FtpDirectory -uri "$baseUri/player"
 Create-FtpDirectory -uri "$baseUri/assets"
@@ -83,6 +87,9 @@ Upload-FtpFile -localFile (Join-Path $apiFolder "db.php") -remoteUri "$baseUri/a
 Upload-FtpFile -localFile (Join-Path $apiFolder "media.php") -remoteUri "$baseUri/api/media.php"
 Upload-FtpFile -localFile (Join-Path $apiFolder "playlists.php") -remoteUri "$baseUri/api/playlists.php"
 Upload-FtpFile -localFile (Join-Path $apiFolder "screens.php") -remoteUri "$baseUri/api/screens.php"
+Upload-FtpFile -localFile (Join-Path $apiFolder "mercadopago.php") -remoteUri "$baseUri/api/mercadopago.php"
+Upload-FtpFile -localFile (Join-Path $apiFolder "webhook.php") -remoteUri "$baseUri/api/webhook.php"
+Upload-FtpFile -localFile (Join-Path $apiFolder "auth.php") -remoteUri "$baseUri/api/auth.php"
 
 # 3. Upload do Player (pasta /player)
 Write-Host "`n=== Enviando Player App ===" -ForegroundColor Yellow

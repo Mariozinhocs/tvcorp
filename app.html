@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TvCorp — Painel do Assinante (Padrão 360)</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖥️</text></svg>">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <style>
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 270px;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-subtle);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar-brand {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2rem;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar-nav button {
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+    .sidebar-nav button:hover, .sidebar-nav button.active {
+      background: rgba(0, 242, 254, 0.15);
+      color: var(--primary-cyan);
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar {
+      height: 70px;
+      background: rgba(7, 11, 20, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .content-body {
+      padding: 2rem;
+      flex: 1;
+    }
+    .grid-screens {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 1.5rem;
+    }
+
+    .sub-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- SIDEBAR DE NAVEGAÇÃO 360 -->
+    <aside class="sidebar">
+      <div>
+        <div class="sidebar-brand">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="10" fill="url(#sidebarLogoGrad)"/>
+            <rect x="8" y="10" width="24" height="17" rx="3" fill="#070b14" stroke="#00f2fe" stroke-width="2"/>
+            <path d="M14 31L26 31" stroke="#00f2fe" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M20 27L20 31" stroke="#00f2fe" stroke-width="2.5"/>
+            <polygon points="17,15.5 25,18.5 17,21.5" fill="#00f2fe"/>
+            <defs>
+              <linearGradient id="sidebarLogoGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7b61ff"/>
+                <stop offset="1" stop-color="#00f2fe"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>TvCorp</span> <span style="font-size: 0.7rem; background: var(--primary-cyan); color: #000; padding: 2px 6px; border-radius: 8px; font-weight: 800;">360</span>
+        </div>
+
+        <ul class="sidebar-nav">
+          <li>
+            <button id="navScreens" class="active" onclick="switchTab('screens')">
+              🖥️ Minhas Telas <span id="badgeScreens" class="badge-status online" style="margin-left: auto;">0</span>
+            </button>
+          </li>
+          <li>
+            <button id="navPlaylists" onclick="switchTab('playlists')">
+              📋 Playlists & Mídias
+            </button>
+          </li>
+          <li>
+            <button id="navSubscription" onclick="switchTab('subscription')">
+              💳 Minha Assinatura & Faturas
+            </button>
+          </li>
+          <li>
+            <button id="navHelp" onclick="switchTab('help')">
+              ❓ Tutoriais & Ajuda
+            </button>
+          </li>
+          <li>
+            <button id="navProfile" onclick="switchTab('profile')">
+              👤 Meu Perfil
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <a href="index.html" style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 12px; text-decoration: none;">🌐 Ir para a Landing Page</a>
+        <button class="btn-secondary" style="width: 100%; justify-content: center; color: var(--accent-pink);" onclick="handleLogout()">
+          🚪 Sair da Conta
+        </button>
+      </div>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+      
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div>
+          <h2 id="viewTitle" style="font-size: 1.2rem; margin: 0;">🖥️ Minhas Telas Corporativas</h2>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <a href="help.html" class="btn-secondary" style="padding: 6px 14px; font-size: 0.85rem; text-decoration: none;">📚 Central de Conhecimento</a>
+          <div class="user-pill" onclick="switchTab('profile')">
+            <span id="userNameDisplay">👤 Carregando...</span>
+            <span id="userPlanBadge" style="font-size: 0.75rem; background: var(--primary-cyan); color: #000; padding: 2px 8px; border-radius: 10px; font-weight: 700;">Trial 7d</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- CORPO DAS VIEWS -->
+      <div class="content-body">
+        
+        <!-- VIEW 1: TELAS (TVS) -->
+        <section id="viewScreens" class="fade-in">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <div>
+              <h1 style="font-size: 1.6rem; margin-bottom: 4px;">Minhas Telas (Smart TVs / TV Box)</h1>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Monitore suas TVs ativas, atribua playlists e recarregue remotamente.</p>
+            </div>
+            <button class="btn-primary" onclick="openPairModal()">
+              🔑 Conectar Nova Tela (6 Dígitos)
+            </button>
+          </div>
+
+          <div id="screensContainer" class="grid-screens">
+            <!-- Renderizado via JS -->
+          </div>
+        </section>
+
+        <!-- VIEW 2: PLAYLISTS & MÍDIAS -->
+        <section id="viewPlaylists" class="fade-in" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <div>
+              <h1 style="font-size: 1.6rem; margin-bottom: 4px;">Playlists & Mídias</h1>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Monte a programação de vídeos, imagens, clima tempo e notícias RSS.</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn-secondary" onclick="openAddMediaModal()">🖼️ Enviar Mídia</button>
+              <button class="btn-primary" onclick="openCreatePlaylistModal()">📋 Criar Playlist</button>
+            </div>
+          </div>
+
+          <div id="playlistsContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;">
+            <!-- Renderizado via JS -->
+          </div>
+        </section>
+
+        <!-- VIEW 3: MINHA ASSINATURA & FATURAS MERCADO PAGO -->
+        <section id="viewSubscription" class="fade-in" style="display: none;">
+          <div style="margin-bottom: 1.5rem;">
+            <h1 style="font-size: 1.6rem; margin-bottom: 4px;">Minha Assinatura & Faturas</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Gerencie seu plano ativo, limite de telas e meio de pagamento.</p>
+          </div>
+
+          <div class="sub-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+              <div>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Plano Atual</span>
+                <h2 id="subPlanTitle" style="font-size: 1.8rem; color: var(--primary-cyan); margin-top: 4px;">Trial 7 Dias Grátis</h2>
+              </div>
+              <span id="subStatusBadge" style="padding: 6px 16px; border-radius: 20px; background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); font-weight: 700; font-size: 0.9rem;">🟢 ATIVO</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 1.5rem; background: rgba(0,0,0,0.3); border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+              <div>
+                <span style="color: var(--text-muted); font-size: 0.85rem;">Limite de Telas</span>
+                <div id="subScreenLimit" style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-top: 4px;">1 Tela</div>
+              </div>
+              <div>
+                <span style="color: var(--text-muted); font-size: 0.85rem;">Vencimento / Renovação</span>
+                <div id="subExpiresAt" style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-top: 4px;">--/--/----</div>
+              </div>
+              <div>
+                <span style="color: var(--text-muted); font-size: 0.85rem;">Método de Pagamento</span>
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--primary-cyan); margin-top: 4px;">Mercado Pago (PIX / Cartão)</div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+              <button class="btn-primary" onclick="openSubscriptionModal('Pro')">⚡ Upgrade para Plano Pro (R$ 89/mês)</button>
+              <button class="btn-secondary" onclick="openSubscriptionModal('Enterprise')">🏢 Plano Enterprise (R$ 199/mês)</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 4: TUTORIAIS & AJUDA (INTEGRADO) -->
+        <section id="viewHelp" class="fade-in" style="display: none;">
+          <div style="margin-bottom: 1.5rem;">
+            <h1 style="font-size: 1.6rem; margin-bottom: 4px;">Tutoriais & Central de Ajuda</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Guias simples para parear suas Smart TVs e solucionar dúvidas técnicas.</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div class="glass-card">
+              <span style="color: var(--primary-cyan); font-weight: 700;">PASSO 1</span>
+              <h3 style="margin: 8px 0;">Instalar o Player na TV</h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                No navegador da sua Smart TV ou TV Box, abra o endereço: <br>
+                <code style="color: var(--primary-cyan);">tvcorp.hubdigital360.com/player/</code>
+              </p>
+            </div>
+
+            <div class="glass-card">
+              <span style="color: var(--primary-purple); font-weight: 700;">PASSO 2</span>
+              <h3 style="margin: 8px 0;">Parear com Código de 6 Dígitos</h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                Na aba <strong>Minhas Telas</strong>, clique em "Conectar Nova Tela" e digite o código que aparece na TV.
+              </p>
+            </div>
+
+            <div class="glass-card">
+              <span style="color: var(--accent-emerald); font-weight: 700;">PASSO 3</span>
+              <h3 style="margin: 8px 0;">Vincular Playlist à TV</h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                Escolha a playlist criada e atribua à tela. A transmissão iniciará automaticamente!
+              </p>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <h3 style="margin-bottom: 4px;">Deseja acessar a documentação completa?</h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Acesse a nossa Central de Conhecimento externa com mais vídeos e tutoriais.</p>
+            </div>
+            <a href="help.html" target="_blank" class="btn-secondary" style="text-decoration: none;">📚 Abrir Central de Ajuda Completa</a>
+          </div>
+        </section>
+
+        <!-- VIEW 5: MEU PERFIL -->
+        <section id="viewProfile" class="fade-in" style="display: none;">
+          <div style="margin-bottom: 1.5rem;">
+            <h1 style="font-size: 1.6rem; margin-bottom: 4px;">Meu Perfil Cadastral</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Informações da conta e dados da empresa.</p>
+          </div>
+
+          <div class="glass-card" style="max-width: 500px;">
+            <div style="margin-bottom: 1rem;">
+              <label style="color: var(--text-muted); font-size: 0.85rem;">Nome Completo</label>
+              <div id="profileName" style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-top: 4px;">--</div>
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <label style="color: var(--text-muted); font-size: 0.85rem;">E-mail Cadastrado</label>
+              <div id="profileEmail" style="font-size: 1.1rem; font-weight: 700; color: var(--primary-cyan); margin-top: 4px;">--</div>
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+              <label style="color: var(--text-muted); font-size: 0.85rem;">Empresa / Razão Social</label>
+              <div id="profileCompany" style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-top: 4px;">--</div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL DE PAREAMENTO (6 DÍGITOS) -->
+  <div id="modalPair" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closePairModal()">&times;</button>
+      <h2>🔑 Conectar Nova Tela (6 Dígitos)</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+        Digite o código de 6 dígitos exibido na Smart TV / TV Box:
+      </p>
+
+      <form onsubmit="handlePairSubmit(event)">
+        <div style="margin-bottom: 1rem;">
+          <label style="font-size: 0.85rem; color: var(--text-muted);">Código da Tela *</label>
+          <input type="text" id="pairCodeInput" class="form-input" placeholder="EX: A9K3P2" maxlength="6" required style="font-family: var(--font-mono); font-size: 1.3rem; text-transform: uppercase; text-align: center; letter-spacing: 4px;">
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <label style="font-size: 0.85rem; color: var(--text-muted);">Nome da Tela *</label>
+          <input type="text" id="pairNameInput" class="form-input" placeholder="Ex: TV Recepção Principal" required>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+          Conectar e Parear Tela ⚡
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CHECKOUT MERCADO PAGO -->
+  <div id="modalSubscription" class="modal-overlay" style="display: none;">
+    <div class="modal-content" style="max-width: 500px;">
+      <button class="modal-close-btn" onclick="closeSubscriptionModal()">&times;</button>
+      <h2>💳 Upgrade de Plano Mercado Pago</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Selecione a opção de pagamento seguro:</p>
+
+      <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+        <button class="btn-primary" style="flex: 1;" onclick="payWithMercadoPago('pix')">⚡ PIX Instantâneo</button>
+        <button class="btn-secondary" style="flex: 1;" onclick="payWithMercadoPago('card')">💳 Cartão de Crédito</button>
+      </div>
+
+      <div id="mpFeedback" style="padding: 12px; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent-emerald); color: var(--accent-emerald); border-radius: var(--radius-md); text-align: center; display: none;"></div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

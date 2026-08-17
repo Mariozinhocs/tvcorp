@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TvCorp — Login / Autenticação SaaS</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔑</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Sora:wght@600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1e1b4b 0%, #070b14 70%);
+      padding: 1rem;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      padding: 2.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .auth-header span {
+      font-size: 2.5rem;
+    }
+    .auth-header h1 {
+      font-size: 1.6rem;
+      margin-top: 0.5rem;
+    }
+    .auth-toggle {
+      display: flex;
+      background: rgba(255,255,255,0.05);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      margin-bottom: 1.5rem;
+    }
+    .auth-toggle button {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+    .auth-toggle button.active {
+      background: var(--primary-purple);
+      color: #fff;
+    }
+    .alert-msg {
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      display: none;
+    }
+    .alert-msg.error {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: var(--accent-pink);
+    }
+    .alert-msg.success {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-emerald);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-card fade-in">
+    <div class="auth-header">
+      <div style="display: flex; justify-content: center; margin-bottom: 12px;">
+        <svg width="48" height="48" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="10" fill="url(#loginLogoGrad)"/>
+          <rect x="8" y="10" width="24" height="17" rx="3" fill="#070b14" stroke="#00f2fe" stroke-width="2"/>
+          <path d="M14 31L26 31" stroke="#00f2fe" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M20 27L20 31" stroke="#00f2fe" stroke-width="2.5"/>
+          <circle cx="20" cy="18.5" r="4" fill="#7b61ff"/>
+          <polygon points="19,16.5 22.5,18.5 19,20.5" fill="#ffffff"/>
+          <defs>
+            <linearGradient id="loginLogoGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#7b61ff"/>
+              <stop offset="1" stop-color="#00f2fe"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h1>Acessar <span class="gradient-text">TvCorp SaaS</span></h1>
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 4px;">Gerenciador de TV Corporativa e Mídia Indoor</p>
+    </div>
+
+    <!-- MENSAGEM DE ALERTA -->
+    <div id="alertMsg" class="alert-msg"></div>
+
+    <!-- ALTERNADOR LOGIN / CADASTRO -->
+    <div class="auth-toggle">
+      <button id="tabLogin" class="active" onclick="switchAuthMode('login')">Entrar</button>
+      <button id="tabRegister" onclick="switchAuthMode('register')">Criar Conta Grátis</button>
+    </div>
+
+    <!-- FORMULÁRIO -->
+    <form id="authForm" onsubmit="handleAuthSubmit(event)">
+      
+      <!-- CAMPO NOME E EMPRESA (REGISTRO) -->
+      <div id="registerFields" style="display: none;">
+        <div style="margin-bottom: 1rem;">
+          <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Nome Completo *</label>
+          <input type="text" id="inputName" class="form-input" placeholder="Seu nome">
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Nome da Empresa / Loja</label>
+          <input type="text" id="inputCompany" class="form-input" placeholder="Ex: Farmácia Alfa">
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">E-mail *</label>
+        <input type="email" id="inputEmail" class="form-input" placeholder="seuemail@empresa.com" required>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Senha *</label>
+        <input type="password" id="inputPassword" class="form-input" placeholder="••••••••" required minlength="6">
+      </div>
+
+      <button type="submit" id="btnSubmit" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+        Entrar no Painel 🚀
+      </button>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="index.html" style="font-size: 0.85rem; color: var(--text-muted);">← Voltar para a Página Inicial</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    let mode = 'login'; // 'login' | 'register'
+
+    function switchAuthMode(newMode) {
+      mode = newMode;
+      const tabLogin = document.getElementById('tabLogin');
+      const tabRegister = document.getElementById('tabRegister');
+      const registerFields = document.getElementById('registerFields');
+      const btnSubmit = document.getElementById('btnSubmit');
+
+      if (mode === 'login') {
+        tabLogin.classList.add('active');
+        tabRegister.classList.remove('active');
+        registerFields.style.display = 'none';
+        btnSubmit.innerText = 'Entrar no Painel 🚀';
+      } else {
+        tabRegister.classList.add('active');
+        tabLogin.classList.remove('active');
+        registerFields.style.display = 'block';
+        btnSubmit.innerText = 'Criar Conta e Ativar Trial ⚡';
+      }
+    }
+
+    async function handleAuthSubmit(e) {
+      e.preventDefault();
+      const alertMsg = document.getElementById('alertMsg');
+      const btnSubmit = document.getElementById('btnSubmit');
+      
+      const email = document.getElementById('inputEmail').value.trim();
+      const password = document.getElementById('inputPassword').value.trim();
+      const name = document.getElementById('inputName').value.trim();
+      const company = document.getElementById('inputCompany').value.trim();
+
+      alertMsg.style.display = 'none';
+      btnSubmit.disabled = true;
+      btnSubmit.innerText = 'Carregando...';
+
+      try {
+        const action = mode === 'login' ? 'login' : 'register';
+        const payload = mode === 'login' ? { email, password } : { name, email, password, company };
+
+        const res = await fetch(`api/auth/${action}.php`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          alertMsg.className = 'alert-msg success';
+          alertMsg.innerText = mode === 'login' ? 'Autenticado com sucesso! Redirecionando...' : 'Conta criada com 7 Dias Grátis de Trial! Entrando...';
+          alertMsg.style.display = 'block';
+
+          localStorage.setItem('tvcorp_user', JSON.stringify(data.user));
+          setTimeout(() => {
+            window.location.href = 'app.html';
+          }, 1200);
+
+        } else {
+          alertMsg.className = 'alert-msg error';
+          alertMsg.innerText = data.error || 'Erro ao autenticar. Tente novamente.';
+          alertMsg.style.display = 'block';
+        }
+      } catch (err) {
+        console.error(err);
+        alertMsg.className = 'alert-msg error';
+        alertMsg.innerText = 'Não foi possível conectar ao servidor.';
+        alertMsg.style.display = 'block';
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.innerText = mode === 'login' ? 'Entrar no Painel 🚀' : 'Criar Conta e Ativar Trial ⚡';
+      }
+    }
+  </script>
+</body>
+</html>

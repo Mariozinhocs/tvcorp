@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import LandingPage from './components/LandingPage';
+import SubscriptionModal from './components/SubscriptionModal';
+import UserProfileModal from './components/UserProfileModal';
 
 // COMPONENTES DE ÍCONES SVG INLINE (Design Premium)
+const GlobeIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+);
+
+const CreditCardIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+);
+
+const UserIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+);
+
 const MonitorIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
 );
@@ -37,10 +52,21 @@ const VideoIcon = () => (
 );
 
 function App() {
-  const [activeTab, setActiveTab] = useState('screens');
+  const [activeTab, setActiveTab] = useState('landing'); // Iniciar na Landing Page do SaaS
   const [screens, setScreens] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [media, setMedia] = useState([]);
+
+  // Estados SaaS e Autenticação
+  const [user, setUser] = useState({ id: 1, name: 'Administrador TvCorp', email: 'admin@tvcorp.com', company: 'TvCorp Inc' });
+  const [subscription, setSubscription] = useState({ plan_name: 'Plano Pro Enterprise', screen_limit: 10, status: 'active', expires_at: '2026-12-31' });
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+  const [showUserProfileModal, setShowUserProfileModal] = useState(false);
+  
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState('login'); // 'login' ou 'register'
+  const [authForm, setAuthForm] = useState({ name: '', email: '', password: '', company: '' });
+  const [authError, setAuthError] = useState('');
 
   // Estados dos modais e formulários
   const [showPairModal, setShowPairModal] = useState(false);
@@ -319,6 +345,34 @@ function App() {
     } catch (err) { console.error(err); }
   };
 
+  const handleAuthSubmit = async (e) => {
+    e.preventDefault();
+    setAuthError('');
+    const endpoint = authMode === 'register' ? '/api/auth.php?action=register' : '/api/auth.php?action=login';
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(authForm)
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setUser(data.user);
+        if (data.subscription) setSubscription(data.subscription);
+        setShowAuthModal(false);
+        setAuthForm({ name: '', email: '', password: '', company: '' });
+        alert(authMode === 'register' ? '🎉 Conta SaaS criada com sucesso! Trial de 7 dias grátis ativado.' : '👋 Bem-vindo de volta!');
+      } else {
+        setAuthError(data.error || 'Erro ao autenticar');
+      }
+    } catch (err) {
+      console.error(err);
+      setAuthError('Erro de conexão ao autenticar');
+    }
+  };
+
   const onlineCount = screens.filter(s => s.status === 'online').length;
 
   return (
@@ -326,18 +380,26 @@ function App() {
       
       {/* SIDEBAR COMPONENT */}
       <aside className="sidebar">
-        <div className="logo-section">
+        <div className="logo-section" onClick={() => setActiveTab('landing')} style={{ cursor: 'pointer' }}>
           <div className="logo-dot"></div>
-          <span className="logo-text">TvCorp</span>
+          <span className="logo-text">TvCorp <small style={{ fontSize: '0.6rem', background: '#3b82f6', padding: '2px 6px', borderRadius: '4px', marginLeft: '4px' }}>SaaS</small></span>
         </div>
         
         <nav className="sidebar-nav">
+          <button 
+            className={`nav-item ${activeTab === 'landing' ? 'active' : ''}`}
+            onClick={() => setActiveTab('landing')}
+          >
+            <GlobeIcon />
+            <span>Site & Pacotes</span>
+          </button>
+
           <button 
             className={`nav-item ${activeTab === 'screens' ? 'active' : ''}`}
             onClick={() => setActiveTab('screens')}
           >
             <MonitorIcon />
-            <span>Telas</span>
+            <span>Telas (TVs)</span>
             {screens.length > 0 && <span className="badge">{screens.length}</span>}
           </button>
 
@@ -347,16 +409,29 @@ function App() {
           >
             <PlaylistIcon />
             <span>Playlists</span>
-            {playlists.length > 0 && <span className="badge bg-purple">{playlists.length}</span>}
-          </button>
-
-          <button 
+            {playlists.length > 0 && <span className="badge bg-purple">{playlists.length}</"          <button 
             className={`nav-item ${activeTab === 'media' ? 'active' : ''}`}
             onClick={() => setActiveTab('media')}
           >
             <MediaIcon />
             <span>Mídias</span>
             {media.length > 0 && <span className="badge bg-purple">{media.length}</span>}
+          </button>
+
+          <button 
+            className="nav-item"
+            onClick={() => setShowUserProfileModal(true)}
+          >
+            <UserIcon />
+            <span>Meu Perfil</span>
+          </button>
+
+          <button 
+            className={`nav-item ${activeTab === 'subscription' ? 'active' : ''}`}
+            onClick={() => setShowSubscriptionModal(true)}
+          >
+            <CreditCardIcon />
+            <span>Assinatura (MP)</span>
           </button>
         </nav>
 
@@ -371,6 +446,49 @@ function App() {
 
       {/* MAIN CONTAINER */}
       <main className="content-container">
+        
+        {/* BARRA SUPERIOR DE CONTA E PLANO SAAS */}
+        <header className="topbar-saas">
+          <div className="topbar-left">
+            <span className="current-view-title">
+              {activeTab === 'landing' && '🌐 Apresentação & Pacotes Comerciais'}
+              {activeTab === 'screens' && '🖥️ Painel de Telas Corporativas'}
+              {activeTab === 'playlists' && '📋 Playlists & Programação'}
+              {activeTab === 'media' && '🖼️ Biblioteca de Mídias'}
+            </span>
+          </div>
+
+          <div className="topbar-right">
+            <div className="plan-badge-pill" onClick={() => setShowSubscriptionModal(true)}>
+              <span className="pill-company">{user ? user.company || user.name : 'Cliente SaaS'}</span>
+              <span className="pill-plan">⚡ {subscription ? subscription.plan_name : 'Trial 7 Dias'} ({screens.length}/{subscription ? subscription.screen_limit : 1} Telas)</span>
+            </div>
+
+            {user ? (
+              <button className="btn-topbar-auth" onClick={() => setShowUserProfileModal(true)}>
+                <UserIcon />
+                <span>Meu Perfil</span>
+              </button>
+            ) : (
+              <button className="btn-topbar-auth primary" onClick={() => { setShowAuthModal(true); setAuthMode('login'); }}>
+                <span>Entrar / Cadastrar</span>
+              </button>
+            )}
+          </div>
+        </header>"on>
+            )}
+          </div>
+        </header>
+
+        {/* VIEW: LANDING PAGE SAAS */}
+        {activeTab === 'landing' && (
+          <LandingPage 
+            onSelectPlan={() => setShowSubscriptionModal(true)}
+            onOpenRegister={() => { setAuthMode('register'); setShowAuthModal(true); }}
+            onOpenLogin={() => { setAuthMode('login'); setShowAuthModal(true); }}
+            onGoToApp={() => setActiveTab('screens')}
+          />
+        )}
         
         {/* VIEW: TELAS */}
         {activeTab === 'screens' && (
@@ -861,6 +979,116 @@ function App() {
                 </button>
                 <button type="submit" className="btn btn-primary">
                   Criar Playlist
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL DE ASSINATURA E CHECKOUT MERCADO PAGO */}
+      <SubscriptionModal 
+        isOpen={showSubscriptionModal} 
+        onClose={() => setShowSubscriptionModal(false)} 
+        user={user} 
+        subscription={subscription} 
+        onRefreshSubscription={() => {
+          setSubscription(prev => ({
+            ...prev,
+            plan_name: 'Plano Pro',
+            screen_limit: 5,
+            status: 'active'
+          }));
+        }}
+      />
+
+      {/* MODAL DE PERFIL DO USUÁRIO & SEGURANÇA */}
+      <UserProfileModal
+        isOpen={showUserProfileModal}
+        onClose={() => setShowUserProfileModal(false)}
+        user={user}
+        subscription={subscription}
+        onUpdateUser={(updatedUser) => setUser(prev => ({ ...prev, ...updatedUser }))}
+      />
+
+      {/* MODAL DE AUTENTICAÇÃO SAAS (LOGIN / REGISTRO) */}
+      {showAuthModal && (
+        <div className="modal-overlay">
+          <div className="modal-card glass-card fade-in auth-modal-card">
+            <h2>{authMode === 'login' ? '🔑 Entrar no TvCorp SaaS' : '🚀 Criar Conta SaaS'}</h2>
+            <p className="modal-description">
+              {authMode === 'login' 
+                ? 'Acesse seu painel administrativo e gerencie suas TVs.' 
+                : 'Crie sua conta em 30 segundos e receba 7 dias de Trial Grátis!'}
+            </p>
+
+            {authError && <div className="alert-danger">{authError}</div>}
+
+            <form onSubmit={handleAuthSubmit}>
+              {authMode === 'register' && (
+                <>
+                  <div className="form-group">
+                    <label>Seu Nome Completo</label>
+                    <input 
+                      type="text"
+                      placeholder="Ex: Carlos Silva"
+                      value={authForm.name}
+                      onChange={(e) => setAuthForm({ ...authForm, name: e.target.value })}
+                      className="input-premium"
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Nome da Empresa / Loja</label>
+                    <input 
+                      type="text"
+                      placeholder="Ex: Farmácia Central, Grupo Alfa"
+                      value={authForm.company}
+                      onChange={(e) => setAuthForm({ ...authForm, company: e.target.value })}
+                      className="input-premium"
+                    />
+                  </div>
+                </>
+              )}
+
+              <div className="form-group">
+                <label>Endereço de E-mail</label>
+                <input 
+                  type="email"
+                  placeholder="seuemail@empresa.com"
+                  value={authForm.email}
+                  onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })}
+                  className="input-premium"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Senha de Acesso</label>
+                <input 
+                  type="password"
+                  placeholder="••••••••"
+                  value={authForm.password}
+                  onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })}
+                  className="input-premium"
+                  required
+                />
+              </div>
+
+              <div className="modal-footer flex-col">
+                <button type="submit" className="btn btn-primary w-full">
+                  {authMode === 'login' ? 'Entrar no Painel' : 'Criar Conta e Ativar Trial ⚡'}
+                </button>
+                <button 
+                  type="button" 
+                  className="btn-switch-auth" 
+                  onClick={() => setAuthMode(authMode === 'login' ? 'register' : 'login')}
+                >
+                  {authMode === 'login' ? 'Não tem uma conta? Cadastre-se grátis' : 'Já tem uma conta? Faça login'}
+                </button>
+                <button type="button" className="btn btn-secondary w-full" onClick={() => setShowAuthModal(false)}>
+                  Cancelar
                 </button>
               </div>
             </form>
