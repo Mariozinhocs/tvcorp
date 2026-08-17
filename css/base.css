@@ -4,13 +4,15 @@
   padding: 0;
 }
 
-body {
-  background-color: var(--bg-primary);
+body, html {
+  background: var(--bg-gradient);
   color: var(--text-main);
   font-family: var(--font-main);
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -34,7 +36,26 @@ button, input, select, textarea {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-purple) 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #c2bdfc 50%, var(--primary-purple) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Custom Scrollbars 360studio */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Central de Ajuda & Tutoriais — TvCorp</title>
+  <title>Central de Ajuda & Tutoriais — TvCorp (360Studio & Anorak)</title>
   <meta name="description" content="Aprenda a instalar o player TvCorp em sua Smart TV ou TV Box, parear telas em 6 dígitos, montar playlists e gerenciar sua assinatura.">
 
   <!-- Favicon -->
@@ -25,9 +25,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 5%;
-      background: rgba(7, 11, 20, 0.85);
-      backdrop-filter: blur(12px);
+      padding: 1.25rem 6%;
+      background: rgba(18, 16, 46, 0.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -37,63 +38,70 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 1.4rem;
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
       font-weight: 800;
       color: #fff;
     }
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 28px;
       list-style: none;
     }
     .nav-links a {
       color: var(--text-muted);
-      font-weight: 600;
+      font-weight: 500;
       font-size: 0.95rem;
     }
     .nav-links a:hover {
-      color: var(--primary-cyan);
+      color: #fff;
     }
 
     .help-hero {
-      padding: 4rem 5% 3rem;
+      padding: 5rem 6% 3.5rem;
       text-align: center;
-      background: radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.12), transparent 70%);
+      background: radial-gradient(circle at 50% 0%, rgba(123, 97, 255, 0.15), transparent 70%);
       border-bottom: 1px solid var(--border-subtle);
     }
     .help-hero h1 {
-      font-size: 2.8rem;
+      font-family: var(--font-heading);
+      font-size: 3rem;
       font-weight: 800;
       margin-bottom: 1rem;
     }
     .help-search-box {
-      max-width: 540px;
-      margin: 2rem auto 0;
+      max-width: 560px;
+      margin: 2.25rem auto 0;
       position: relative;
     }
     .help-search-box input {
       width: 100%;
-      padding: 16px 20px 16px 48px;
-      background: rgba(15, 23, 42, 0.8);
+      padding: 16px 20px 16px 52px;
+      background: var(--bg-input);
       border: 1px solid var(--border-glow);
       border-radius: 30px;
       color: #fff;
       font-size: 1rem;
       outline: none;
+      transition: all 0.2s ease;
+    }
+    .help-search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 20px var(--primary-glow);
     }
     .help-search-icon {
       position: absolute;
-      left: 18px;
+      left: 20px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--primary-cyan);
+      color: var(--primary);
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 3rem 5%;
+      padding: 3.5rem 6%;
     }
 
     .tutorials-grid {
@@ -106,20 +114,20 @@
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 2rem;
-      transition: all 0.3s ease;
+      padding: 2.25rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .tutorial-card:hover {
-      border-color: var(--primary-cyan);
+      border-color: var(--border-hover);
       transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
+      box-shadow: 0 15px 35px rgba(123, 97, 255, 0.15);
     }
     .tutorial-badge {
       display: inline-block;
       padding: 4px 12px;
       border-radius: 12px;
       background: rgba(123, 97, 255, 0.15);
-      color: var(--primary-purple);
+      color: #c2bdfc;
       font-size: 0.8rem;
       font-weight: 700;
       margin-bottom: 1rem;
@@ -141,7 +149,7 @@
       content: "✓";
       position: absolute;
       left: 0;
-      color: var(--primary-cyan);
+      color: var(--primary);
       font-weight: 800;
     }
 
@@ -182,16 +190,16 @@
 
     .support-cta {
       margin-top: 4rem;
-      background: linear-gradient(135deg, rgba(123, 97, 255, 0.15), rgba(0, 242, 254, 0.15));
+      background: linear-gradient(135deg, rgba(123, 97, 255, 0.1), rgba(0, 242, 254, 0.05));
       border: 1px solid var(--border-glow);
       border-radius: var(--radius-lg);
-      padding: 3rem 2rem;
+      padding: 3.5rem 2rem;
       text-align: center;
     }
 
     footer {
       border-top: 1px solid var(--border-subtle);
-      padding: 2.5rem 5%;
+      padding: 3rem 6%;
       text-align: center;
       color: var(--text-muted);
       font-size: 0.9rem;
@@ -201,39 +209,27 @@
 </head>
 <body>
 
-  <!-- NAVBAR 360 -->
+  <!-- NAVBAR 360STUDIO -->
   <nav class="navbar">
     <a href="index.html" class="brand-logo">
-      <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="40" height="40" rx="10" fill="url(#logoGrad)"/>
-        <rect x="8" y="10" width="24" height="17" rx="3" fill="#070b14" stroke="#00f2fe" stroke-width="2"/>
-        <path d="M14 31L26 31" stroke="#00f2fe" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M20 27L20 31" stroke="#00f2fe" stroke-width="2.5"/>
-        <polygon points="17,15.5 25,18.5 17,21.5" fill="#00f2fe"/>
-        <defs>
-          <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#00f2fe"/>
-            <stop offset="1" stop-color="#7b61ff"/>
-          </linearGradient>
-        </defs>
-      </svg>
-      <span>TvCorp</span>
+      <span class="logo-dot"></span>
+      <span class="gradient-text">TvCorp</span>
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="help.html" style="color: var(--primary-cyan);">Tutoriais & Ajuda</a></li>
+      <li><a href="help.html" style="color: #fff;">Tutoriais & Ajuda</a></li>
       <li><a href="login.html">Entrar</a></li>
-      <li><a href="login.html?register=true" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">Testar Grátis 7 Dias</a></li>
+      <li><a href="login.html?register=true" class="btn-primary" style="padding: 10px 20px; font-size: 0.85rem;">Testar 7 Dias Grátis 🚀</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <section class="help-hero">
-    <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0,242,254,0.1); border: 1px solid var(--border-glow); color: var(--primary-cyan); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">
-      📚 Central de Conhecimento 360
+    <div class="hero-badge">
+      📚 Central de Conhecimento Studio 360
     </div>
     <h1>Como podemos ajudar você hoje?</h1>
-    <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 680px; margin: 0 auto;">
+    <p style="color: var(--text-muted); font-size: 1.15rem; max-width: 700px; margin: 0 auto;">
       Aprenda a instalar o player em qualquer Smart TV ou TV Box, parear dispositivos em segundos e gerenciar suas playlists corporativas.
     </p>
 
@@ -258,7 +254,7 @@
         <p style="color: var(--text-muted); font-size: 0.95rem;">Abra o navegador da sua Smart TV (Samsung Tizen, LG WebOS, Android TV, TCL, Philips) ou TV Box.</p>
         <ul class="steps-list">
           <li>Acesse a URL do Player: <code>tvcorp.hubdigital360.com/player/</code></li>
-          <li>Coloque o navegador da TV em Modo Tela Cheia (F11 se no PC).</li>
+          <li>Coloque o navegador da TV em Modo Tela Cheia.</li>
           <li>Um código de pareamento de 6 dígitos surgirá na tela.</li>
         </ul>
       </div>
@@ -269,9 +265,9 @@
         <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">2. Pareamento em 6 Dígitos</h3>
         <p style="color: var(--text-muted); font-size: 0.95rem;">Conecte a TV ao seu painel em menos de 10 segundos sem precisar digitar senhas na TV.</p>
         <ul class="steps-list">
-          <li>Acesse o <a href="app.html" style="color: var(--primary-cyan);">Painel do Assinante</a> e clique em <strong>Minhas Telas</strong>.</li>
+          <li>Acesse o <a href="app.html" style="color: var(--primary);">Painel do Assinante</a> e clique em <strong>Minhas Telas</strong>.</li>
           <li>Clique no botão <strong>+ Conectar Nova Tela</strong>.</li>
-          <li>Digite o código de 6 dígitos exibido na TV e dê um nome (ex: Recepção).</li>
+          <li>Digite o código de 6 dígitos exibido na TV e dê um nome.</li>
         </ul>
       </div>
 
@@ -295,7 +291,7 @@
         <ul class="steps-list">
           <li>Acesse a aba <strong>Minha Assinatura & Faturas</strong> no painel.</li>
           <li>Escolha entre ⚡ <strong>PIX Instantâneo</strong> (QR Code) ou 💳 <strong>Cartão de Crédito</strong>.</li>
-          <li>A liberação é automática imediatamente após a confirmação do pagamento.</li>
+          <li>A liberação é automática imediatamente após a confirmação.</li>
         </ul>
       </div>
 
@@ -325,34 +321,13 @@
           O player TvCorp possui cache offline inteligente. A playlist carregada continua sendo exibida em loop contínuo mesmo que a conexão com a internet oscile ou caia temporariamente.
         </div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Como funciona o período de teste grátis de 7 dias?
-          <span>+</span>
-        </button>
-        <div class="faq-answer">
-          Ao cadastrar sua conta, seu plano <strong>Trial Grátis de 7 Dias</strong> é ativado automaticamente com suporte a 1 tela completa. Não é necessário cadastrar cartão de crédito para testar.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          Posso gerenciar múltiplas telas em locais ou filiais diferentes?
-          <span>+</span>
-        </button>
-        <div class="faq-answer">
-          Com certeza! Pelo painel TvCorp você pode gerenciar dezenas de telas em filiais, escritórios ou lojas distintas, enviando conteúdos específicos ou unificados para cada grupo de telas em tempo real.
-        </div>
-      </div>
-
     </div>
 
     <!-- SUPPORT CTA -->
     <div class="support-cta">
-      <h2 style="font-size: 2rem; margin-bottom: 0.75rem;">Ainda precisa de ajuda?</h2>
+      <h2 style="font-size: 2.2rem; margin-bottom: 0.75rem;">Ainda precisa de ajuda?</h2>
       <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 1.5rem;">
-        Nossa equipe de suporte técnico está à disposição para auxiliar no pareamento das suas telas e configuração do ecossistema.
+        Nossa equipe de suporte técnico está à disposição para auxiliar no pareamento das suas telas.
       </p>
       <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
         <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Preciso%20de%20suporte%20com%20o%20TvCorp." target="_blank" class="btn-primary" style="padding: 12px 28px;">💬 Falar no WhatsApp Suporte</a>
@@ -364,7 +339,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2026 TvCorp — Plataforma SaaS de TV Corporativa & Mídia Indoor. Todos os direitos reservados.</p>
+    <p>© 2026 TvCorp Studio 360 & Anorak — Plataforma SaaS de TV Corporativa & Mídia Indoor. Todos os direitos reservados.</p>
   </footer>
 
   <script>

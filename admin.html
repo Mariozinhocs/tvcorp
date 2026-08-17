@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel Administrativo & Gestão de Assinaturas — TvCorp (Padrão 360)</title>
+  <title>Painel Administrativo & Gestão de Assinaturas — TvCorp (360Studio & Anorak)</title>
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,23 +17,23 @@
 
   <style>
     body {
-      padding: 2rem 5%;
-      background: #070b14;
+      padding: 2.25rem 6%;
+      background: var(--bg-gradient);
       color: #fff;
     }
     .admin-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.25rem;
       border-bottom: 1px solid var(--border-subtle);
       padding-bottom: 1.25rem;
     }
     .stats-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 2rem;
+      gap: 18px;
+      margin-bottom: 2.25rem;
     }
     .stat-card {
       background: var(--bg-card);
@@ -42,11 +42,13 @@
       border-radius: var(--radius-md);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(10px);
     }
     .stat-val {
-      font-size: 1.8rem;
+      font-family: var(--font-heading);
+      font-size: 1.9rem;
       font-weight: 800;
-      color: var(--primary-cyan);
+      color: var(--primary);
       margin-top: 6px;
     }
 
@@ -58,8 +60,8 @@
       flex-wrap: wrap;
     }
     .filter-bar input, .filter-bar select {
-      padding: 10px 16px;
-      background: rgba(15, 23, 42, 0.8);
+      padding: 12px 16px;
+      background: var(--bg-input);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
       color: #fff;
@@ -73,7 +75,7 @@
       margin-top: 1rem;
     }
     th, td {
-      padding: 14px 16px;
+      padding: 14px 18px;
       text-align: left;
       border-bottom: 1px solid var(--border-subtle);
       font-size: 0.9rem;
@@ -81,10 +83,10 @@
     th {
       color: var(--text-muted);
       font-weight: 600;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.01);
     }
     tr:hover {
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.03);
     }
 
     .action-btn-group {
@@ -101,25 +103,13 @@
 </head>
 <body>
 
-  <!-- HEADER ADMIN 360 -->
+  <!-- HEADER ADMIN 360STUDIO -->
   <div class="admin-header">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="40" height="40" rx="10" fill="url(#adminLogoGrad)"/>
-        <rect x="8" y="10" width="24" height="17" rx="3" fill="#070b14" stroke="#00f2fe" stroke-width="2"/>
-        <path d="M14 31L26 31" stroke="#00f2fe" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M20 27L20 31" stroke="#00f2fe" stroke-width="2.5"/>
-        <polygon points="17,15.5 25,18.5 17,21.5" fill="#00f2fe"/>
-        <defs>
-          <linearGradient id="adminLogoGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#7b61ff"/>
-            <stop offset="1" stop-color="#00f2fe"/>
-          </linearGradient>
-        </defs>
-      </svg>
+      <span class="logo-dot" style="width: 16px; height: 16px;"></span>
       <div>
-        <h1 style="font-size: 1.6rem; margin: 0;">Painel de Gestão SaaS & Assinaturas</h1>
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">Controle Global de Clientes, Planos e Integração Mercado Pago</p>
+        <h1 style="font-size: 1.6rem; margin: 0; font-family: var(--font-heading);" class="gradient-text">Painel de Gestão SaaS TvCorp</h1>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">Controle Global de Clientes, Assinaturas e Mercado Pago API (Padrão 360 & Anorak)</p>
       </div>
     </div>
     <div style="display: flex; gap: 12px;">
@@ -144,11 +134,11 @@
     </div>
     <div class="stat-card">
       <span style="color: var(--text-muted); font-size: 0.85rem;">Clientes em Trial</span>
-      <div id="statTrialSubs" class="stat-val" style="color: #f59e0b;">0</div>
+      <div id="statTrialSubs" class="stat-val" style="color: var(--accent-amber);">0</div>
     </div>
     <div class="stat-card">
       <span style="color: var(--text-muted); font-size: 0.85rem;">Assinantes Ativos</span>
-      <div id="statActiveSubs" class="stat-val" style="color: var(--primary-cyan);">0</div>
+      <div id="statActiveSubs" class="stat-val" style="color: var(--primary);">0</div>
     </div>
   </div>
 
@@ -165,8 +155,8 @@
   </div>
 
   <!-- TABELA DINÂMICA DE ASSINANTES -->
-  <div class="glass-panel" style="padding: 1.5rem; border-radius: var(--radius-lg);">
-    <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Gestão Dinâmica de Assinantes & Licenças</h3>
+  <div class="glass-panel" style="padding: 1.75rem; border-radius: var(--radius-lg);">
+    <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Gestão Dinâmica de Assinantes & Licenças</h3>
     <div style="overflow-x: auto;">
       <table>
         <thead>
@@ -249,12 +239,12 @@
               <strong>${escapeHTML(u.name)}</strong>
               ${u.company ? `<div style="font-size: 0.78rem; color: var(--text-muted);">${escapeHTML(u.company)}</div>` : ''}
             </td>
-            <td style="color: var(--primary-cyan);">${escapeHTML(u.email)}</td>
+            <td style="color: var(--primary);">${escapeHTML(u.email)}</td>
             <td>
               <span style="font-weight: 700; color: #fff;">${escapeHTML(u.plan_name || 'Sem Plano')}</span>
               <div style="font-size: 0.75rem; color: var(--text-muted);">${u.screen_limit || 1} Telas permitidas</div>
             </td>
-            <td><strong style="color: var(--primary-cyan);">${u.total_screens || 0}</strong></td>
+            <td><strong style="color: var(--primary);">${u.total_screens || 0}</strong></td>
             <td>
               <span class="badge-status ${isActive ? 'online' : 'offline'}">
                 ${isActive ? (isTrial ? '🟡 Trial Active' : '🟢 Ativo') : '🔴 Expirado'}
@@ -265,7 +255,7 @@
               <div class="action-btn-group">
                 <button class="btn-secondary btn-xs" onclick="extendTrial(${u.id})" title="Extender Trial em 7 dias">⚡ +7d Trial</button>
                 <button class="btn-secondary btn-xs" onclick="changePlan(${u.id})" title="Alterar Plano do Cliente">🔄 Plano</button>
-                <button class="btn-secondary btn-xs" style="color: ${isActive ? '#ef4444' : 'var(--accent-emerald)'};" onclick="toggleUserStatus(${u.id})">
+                <button class="btn-secondary btn-xs" style="color: ${isActive ? '#ff3b30' : 'var(--accent-emerald)'};" onclick="toggleUserStatus(${u.id})">
                   ${isActive ? '🔒 Suspender' : '🔓 Ativar'}
                 </button>
               </div>
