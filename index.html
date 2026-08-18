@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TvCorp — Plataforma SaaS de TV Corporativa & Mídia Indoor (360Studio & Anorak)</title>
-  <meta name="description" content="Sistema inteligente de gestão de telas corporativas, playlists reativas e comunicação interna em tempo real.">
+  <title>TvCorp — Transforme Suas Smart TVs em Hubs de Comunicação e Mídia Indoor</title>
+  <meta name="description" content="TvCorp é a plataforma inteligente para gestão de telas corporativas, playlists reativas, notícias RSS ao vivo, alertas de emergência e mídia indoor.">
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>">
@@ -37,7 +37,7 @@
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-family: var(--font-heading);
       font-size: 1.5rem;
       font-weight: 800;
@@ -53,6 +53,7 @@
       color: var(--text-muted);
       font-weight: 500;
       font-size: 0.95rem;
+      transition: color 0.2s ease;
     }
     .nav-links a:hover {
       color: #fff;
@@ -61,7 +62,7 @@
     .hero-section {
       padding: 5rem 6% 3.5rem;
       text-align: center;
-      max-width: 980px;
+      max-width: 1020px;
       margin: 0 auto;
     }
     .hero-title {
@@ -75,7 +76,7 @@
       font-size: 1.25rem;
       color: var(--text-muted);
       margin-bottom: 2.5rem;
-      max-width: 780px;
+      max-width: 800px;
       margin-left: auto;
       margin-right: auto;
       line-height: 1.6;
@@ -159,61 +160,60 @@
 </head>
 <body>
 
-  <!-- NAVBAR COM LOGO DOT NEON 360STUDIO -->
+  <!-- NAVBAR COM MARCA PURA "TvCorp" -->
   <nav class="navbar">
     <div style="display: flex; align-items: center; gap: 16px;">
       <a href="index.html" class="brand-logo">
         <span class="logo-dot"></span>
         <span class="gradient-text">TvCorp</span>
-        <span style="font-size: 0.7rem; background: rgba(123, 97, 255, 0.2); color: #c2bdfc; border: 1px solid var(--border-glow); padding: 2px 8px; border-radius: 10px; font-weight: 700;">STUDIO 360</span>
       </a>
     </div>
 
     <ul class="nav-links">
-      <li><a href="#demo">Simulador TV</a></li>
       <li><a href="#recursos">Recursos</a></li>
-      <li><a href="#planos">Planos SaaS</a></li>
+      <li><a href="#casos-de-uso">Casos de Uso</a></li>
+      <li><a href="#planos">Planos</a></li>
       <li><a href="help.html">Tutoriais & Ajuda</a></li>
       <li><a href="login.html" style="color: #fff;">Entrar</a></li>
       <li><a href="login.html?register=true" class="btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">Testar 7 Dias Grátis 🚀</a></li>
     </ul>
   </nav>
 
-  <!-- HERO 360STUDIO / ANORAK -->
+  <!-- HERO SECTION BENCHMARK SCREENCLOUD -->
   <header class="hero-section fade-in">
     <div class="hero-badge">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>
-      Plataforma SaaS de TV Corporativa N° 1
+      Plataforma Inteligente de TV Corporativa & Mídia Indoor
     </div>
 
     <h1 class="hero-title">
-      Comunicação Interna Inteligente <br>
-      <span class="gradient-text">Em Todas as Suas Telas</span>
+      Transforme Suas Smart TVs em <br>
+      <span class="gradient-text">Hubs de Comunicação em Tempo Real</span>
     </h1>
 
     <p class="hero-desc">
-      Gerencie a programação das suas Smart TVs e TV Boxes em tempo real. Crie playlists personalizadas, envie alertas instantâneos, monitore seus players e engaje seus colaboradores em minutos.
+      Conecte, crie e controle a programação das suas Smart TVs, TV Boxes e totens de qualquer lugar. Playlists inteligentes, widgets de notícias ao vivo, alertas de emergência em 1 clique e monitoramento remoto.
     </p>
 
     <div class="hero-cta">
       <a href="login.html?register=true" class="btn-primary" style="font-size: 1.1rem; padding: 14px 32px;">
         Começar Teste Grátis de 7 Dias 🚀
       </a>
-      <a href="help.html" class="btn-secondary" style="font-size: 1.1rem; padding: 14px 28px;">
-        📚 Ver Demonstrador & Guia
+      <a href="#demo" class="btn-secondary" style="font-size: 1.1rem; padding: 14px 28px;">
+        🎬 Ver Demonstrador Ao Vivo
       </a>
     </div>
 
-    <!-- HERO STATS BAR 360STUDIO -->
+    <!-- HERO STATS BAR (BENCHMARK SCREENCLOUD) -->
     <div class="hero-stats">
       <div class="stat-item">
-        <span class="stat-num" style="color: var(--success);">99.9%</span>
+        <span class="stat-num" style="color: #00ff66;">99.9%</span>
         <span class="stat-label">Disponibilidade dos Players</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
         <span class="stat-num" style="color: var(--primary);">&lt; 3s</span>
-        <span class="stat-label">Atualização de Conteúdo</span>
+        <span class="stat-label">Atualização de Conteúdo Remoto</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
@@ -223,25 +223,27 @@
     </div>
   </header>
 
-  <!-- SIMULADOR AO VIVO DE TV CORPORATIVA (DEMO 360STUDIO) -->
+  <!-- SIMULADOR AO VIVO DE TV CORPORATIVA (STUDIO CMS DEMO) -->
   <section id="demo" style="padding: 3rem 6%; text-align: center; max-width: 1080px; margin: 0 auto;">
-    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Simulador de Player Ao Vivo</h2>
-    <p style="color: var(--text-muted); margin-bottom: 2rem;">Veja como o conteúdo é exibido instantaneamente nas Smart TVs da sua empresa.</p>
+    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Demonstrador do Player em Tempo Real</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2rem;">Veja como o TvCorp renderiza comunicados, widgets e vídeos em Full HD/4K nativamente.</p>
 
     <div class="glass-panel" style="padding: 1rem; border-radius: var(--radius-xl); border: 1px solid var(--border-glow);">
       <div style="background: #000; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 16/9; position: relative;">
         <img src="https://images.unsplash.com/photo-1542744094-3a31f103e35f?q=80&w=1200&auto=format&fit=crop" alt="TV Corporativa Demo" style="width: 100%; height: 100%; object-fit: cover;">
         
+        <!-- WIDGET SUPERIOR DE HORA E CLIMA -->
         <div style="position: absolute; top: 20px; right: 20px; background: rgba(3, 2, 12, 0.85); backdrop-filter: blur(8px); padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 10px;">
           <span style="font-size: 0.8rem; color: var(--primary-cyan); font-weight: 700;">☀️ 28°C São Paulo</span>
           <span style="color: rgba(255,255,255,0.2);">|</span>
-          <span style="font-size: 0.8rem; color: #fff; font-weight: 600;">⏰ 16:55</span>
+          <span style="font-size: 0.8rem; color: #fff; font-weight: 600;">⏰ 12:15</span>
         </div>
 
-        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(3, 2, 12, 0.9); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle);">
+        <!-- OVERLAY DE TICKER DE NOTÍCIAS RSS AO VIVO -->
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(3, 2, 12, 0.92); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle);">
           <div style="display: flex; align-items: center; gap: 12px;">
             <span style="background: var(--primary); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.75rem;">AO VIVO</span>
-            <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">📢 COMUNICADO: Boas-vindas aos novos colaboradores da unidade São Paulo!</span>
+            <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">📢 COMUNICADO DA DIRETORIA: Reunião Geral de Alinhamento e Metas às 16h</span>
           </div>
           <span class="badge-status online">🟢 PLAYER ONLINE (1080p 60FPS)</span>
         </div>
@@ -249,45 +251,149 @@
     </div>
   </section>
 
-  <!-- RECURSOS E SOLUÇÕES 360STUDIO -->
-  <section id="recursos" style="padding: 4.5rem 6%; max-width: 1180px; margin: 0 auto;">
-    <div style="text-align: center; margin-bottom: 3rem;">
+  <!-- VITRINE COMPLETA DE RECURSOS (STUDIO CMS BENCHMARK) -->
+  <section id="recursos" style="padding: 5rem 6%; max-width: 1200px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 3.5rem;">
       <div class="hero-badge" style="margin-bottom: 0.75rem;">
-        ⚡ Ecossistema Completo
+        ⚡ Recursos de Classe Mundial
       </div>
-      <h2 style="font-size: 2.5rem;">Recursos Desenhados para Alta Performance</h2>
+      <h2 style="font-size: 2.5rem;">Tudo o Que Sua Empresa Precisa para Mídia Indoor</h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0.5rem auto 0;">
+        Conheça a plataforma criada para simplificar a gestão de qualquer rede de telas corporativas.
+      </p>
     </div>
     
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+      
+      <!-- RECURSO 1 -->
       <div class="glass-card">
-        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem;">🔑 Pareamento Rápido em 6 Dígitos</h3>
-        <p style="color: var(--text-muted); line-height: 1.6;">Ligue a TV, digite o código de 6 dígitos gerado e pareie qualquer dispositivo sem complicações em menos de 10 segundos.</p>
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
+          <span style="color: var(--primary-cyan);">🔑</span> Pareamento em 6 Dígitos
+        </h3>
+        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+          Ligue a TV, digite o código de 6 dígitos gerado na tela e conecte seu dispositivo sem configurações complexas de IP ou rede em 10 segundos.
+        </p>
       </div>
 
+      <!-- RECURSO 2 -->
       <div class="glass-card">
-        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem;">⚡ Instant Takeover (Alertas)</h3>
-        <p style="color: var(--text-muted); line-height: 1.6;">Interrompa a programação para avisos de emergência, comunicados da diretoria ou celebração de metas atingidas com 1 clique.</p>
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
+          <span style="color: var(--primary);">📅</span> Agendamento Inteligente (Smart Scheduling)
+        </h3>
+        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+          Agende mídias e avisos por horário, dia da semana ou datas comemorativas específicas com transições suaves e repetição automática.
+        </p>
       </div>
 
+      <!-- RECURSO 3 -->
       <div class="glass-card">
-        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem;">📸 Print Remoto da Tela</h3>
-        <p style="color: var(--text-muted); line-height: 1.6;">Monitore exatamente o que está sendo exibido em cada Smart TV ou TV Box em tempo real com capturas remotas automáticas.</p>
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
+          <span style="color: #00ff66;">📰</span> Widgets de Notícias RSS & Clima
+        </h3>
+        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+          Mantenha a equipe informada com feeds automáticos de notícias atualizadas em tempo real, cotações de moedas, QR Codes e previsão do tempo.
+        </p>
       </div>
+
+      <!-- RECURSO 4 -->
+      <div class="glass-card">
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
+          <span style="color: #ff3b30;">🚨</span> Instant Takeover (Alertas Urgentes)
+        </h3>
+        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+          Interrompa a programação normal instantaneamente para transmitir avisos de emergência, metas batidas ou comunicados urgentes em 1 clique.
+        </p>
+      </div>
+
+      <!-- RECURSO 5 -->
+      <div class="glass-card">
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
+          <span style="color: #f59e0b;">📸</span> Monitoring Remoto & Print da TV
+        </h3>
+        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+          Veja exatamente o que está passando em cada Smart TV ou TV Box remota com capturas instantâneas e indicador de sinal online/offline.
+        </p>
+      </div>
+
+      <!-- RECURSO 6 -->
+      <div class="glass-card">
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
+          <span style="color: #ec4899;">🏢</span> Gestão Multi-Lojas & Grupos de Telas
+        </h3>
+        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
+          Organize suas telas por filiais, departamentos ou cidades distintas, enviando conteúdos específicos para cada grupo de telas.
+        </p>
+      </div>
+
     </div>
   </section>
 
-  <!-- SEÇÃO DE PLANOS (360STUDIO) -->
-  <section id="planos" style="padding: 4rem 0; text-align: center;">
-    <h2 style="font-size: 2.4rem; margin-bottom: 0.5rem;">Escolha o Plano Ideal para a sua Empresa</h2>
-    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Ative seu teste grátis de 7 dias sem necessidade de cartão de crédito.</p>
+  <!-- SEÇÃO DE CASOS DE USO POR INDÚSTRIA (BENCHMARK SCREENCLOUD) -->
+  <section id="casos-de-uso" style="padding: 4rem 6%; max-width: 1200px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: 2.2rem;">Soluções Desenhadas para o Seu Negócio</h2>
+      <p style="color: var(--text-muted); margin-top: 0.5rem;">Descubra como o TvCorp transforma a comunicação nos mais diversos setores.</p>
+    </div>
 
+    <div class="use-cases-grid">
+      
+      <div class="use-case-card">
+        <span style="font-size: 2rem;">🏢</span>
+        <h3 style="margin: 12px 0 6px; font-size: 1.15rem;">Escritórios & Endomarketing</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+          Alinhe a equipe com avisos da diretoria, aniversariantes do mês, metas batidas e comunicados de RH.
+        </p>
+      </div>
+
+      <div class="use-case-card">
+        <span style="font-size: 2rem;">🛍️</span>
+        <h3 style="margin: 12px 0 6px; font-size: 1.15rem;">Varejo & Mídia Indoor</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+          Aumente as vendas na loja física exibindo ofertas relâmpago, lançamentos de produtos e vídeos promocionais.
+        </p>
+      </div>
+
+      <div class="use-case-card">
+        <span style="font-size: 2rem;">🏨</span>
+        <h3 style="margin: 12px 0 6px; font-size: 1.15rem;">Lobbies, Clínicas & Hotéis</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+          Receba visitantes com mensagens personalizadas de boas-vindas, programação de eventos e guias de orientações.
+        </p>
+      </div>
+
+      <div class="use-case-card">
+        <span style="font-size: 2rem;">🏭</span>
+        <h3 style="margin: 12px 0 6px; font-size: 1.15rem;">Indústria & Dashboards</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+          Transmita indicadores de produção em tempo real, alertas de segurança e metas de fábrica no chão de fábrica.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO DE PLANOS COM SELETOR MENSAL/ANUAL E TABELA COMPARATIVA -->
+  <section id="planos" style="padding: 5rem 0; text-align: center;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Planos Transparentes para Qualquer Tamanho de Rede</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2rem;">Comece seu teste grátis de 7 dias sem necessidade de cadastrar cartão de crédito.</p>
+
+    <!-- SELETOR FATURAMENTO MENSAL / ANUAL -->
+    <div class="billing-toggle-container">
+      <button class="billing-toggle-btn active" id="btnMonthly" onclick="setBilling('monthly')">Mensal</button>
+      <button class="billing-toggle-btn" id="btnAnnual" onclick="setBilling('annual')">
+        Anual <span class="discount-badge">-20% DESCONTO</span>
+      </button>
+    </div>
+
+    <!-- CARDS DOS PLANOS (360STUDIO STYLE) -->
     <div class="marquee-wrapper">
       <div class="marquee-track">
         
+        <!-- PLANO 1: START -->
         <div class="price-card">
           <h3>📱 Plano Start</h3>
           <p style="color: var(--text-muted); font-size: 0.85rem;">Para pequenas lojas e recepções</p>
-          <div class="price-val">R$ 39<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
+          <div class="price-val" id="priceStart">R$ 39<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
           <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
             <li>✔ Até 1 Tela Ativa</li>
             <li>✔ Playlists Ilimitadas</li>
@@ -297,11 +403,12 @@
           <a href="login.html?register=true" class="btn-secondary" style="width: 100%; justify-content: center;">Testar 7 Dias Grátis</a>
         </div>
 
+        <!-- PLANO 2: PRO -->
         <div class="price-card featured">
           <div style="position: absolute; top: -12px; right: 20px; background: var(--primary); color: #fff; padding: 2px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">MAIS POPULAR</div>
           <h3>⚡ Plano Pro</h3>
           <p style="color: var(--text-muted); font-size: 0.85rem;">Para empresas em crescimento</p>
-          <div class="price-val">R$ 89<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
+          <div class="price-val" id="pricePro">R$ 89<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
           <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
             <li>✔ Até 5 Telas Ativas</li>
             <li>✔ Instant Takeover & Print da TV</li>
@@ -311,10 +418,11 @@
           <a href="login.html?register=true" class="btn-primary" style="width: 100%; justify-content: center;">Assinar Pro ⚡</a>
         </div>
 
+        <!-- PLANO 3: ENTERPRISE -->
         <div class="price-card">
           <h3>🏢 Plano Enterprise</h3>
           <p style="color: var(--text-muted); font-size: 0.85rem;">Para grandes redes e escritórios</p>
-          <div class="price-val">R$ 199<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
+          <div class="price-val" id="priceEnterprise">R$ 199<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
           <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
             <li>✔ Até 20 Telas Ativas</li>
             <li>✔ Multi-usuários & Relatórios</li>
@@ -324,11 +432,12 @@
           <a href="login.html?register=true" class="btn-secondary" style="width: 100%; justify-content: center;">Assinar Enterprise</a>
         </div>
 
+        <!-- PLANO 4: MASTER FRANCHISE -->
         <div class="price-card" style="border-color: var(--primary);">
           <div style="position: absolute; top: -12px; right: 20px; background: var(--primary); color: #fff; padding: 2px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 800;">WHITELABEL</div>
           <h3>👑 Master Franchise</h3>
           <p style="color: var(--text-muted); font-size: 0.85rem;">Para redes franqueadoras e agências</p>
-          <div class="price-val">R$ 399<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
+          <div class="price-val" id="priceMaster">R$ 399<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
           <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
             <li>✔ Até 100 Telas + Multi-Loja</li>
             <li>✔ Domínio Próprio & Whitelabel</li>
@@ -340,23 +449,227 @@
 
       </div>
     </div>
+
+    <!-- MATRIZ COMPARATIVA DE RECURSOS (BENCHMARK SCREENCLOUD) -->
+    <div style="max-width: 1100px; margin: 3rem auto 0; padding: 0 6%;">
+      <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Comparar Todos os Recursos dos Planos</h3>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">Veja o detalhamento completo de funcionalidades oferecidas em cada plano.</p>
+
+      <div class="compare-table-wrapper">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th style="width: 34%;">Recursos & Capacidades</th>
+              <th style="width: 16.5%;">Start</th>
+              <th style="width: 16.5%;">Pro</th>
+              <th style="width: 16.5%;">Enterprise</th>
+              <th style="width: 16.5%;">Master</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <!-- CATEGORIA 1: GESTÃO DE TELAS -->
+            <tr class="category-header">
+              <td colspan="5">🖥️ Gestão de Telas & Dispositivos</td>
+            </tr>
+            <tr>
+              <td>Limite de Telas Ativas Simultâneas</td>
+              <td><strong>1 Tela</strong></td>
+              <td><strong>5 Telas</strong></td>
+              <td><strong>20 Telas</strong></td>
+              <td><strong>100 Telas</strong></td>
+            </tr>
+            <tr>
+              <td>Pareamento Rápido em 6 Dígitos</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+            </tr>
+            <tr>
+              <td>Monitoramento Online/Offline em Tempo Real</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+            </tr>
+            <tr>
+              <td>Captura Remota de Tela (Print da TV)</td>
+              <td><span class="check-no">✕</span></td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+            </tr>
+            <tr>
+              <td>Instant Takeover (Alertas Urgentes)</td>
+              <td><span class="check-no">✕</span></td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+            </tr>
+
+            <!-- CATEGORIA 2: CONTEÚDO & WIDGETS -->
+            <tr class="category-header">
+              <td colspan="5">🖼️ Conteúdo, Playlists & Widgets</td>
+            </tr>
+            <tr>
+              <td>Playlists e Mídias Ilimitadas</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+            </tr>
+            <tr>
+              <td>Widgets de Notícias RSS ao Vivo & Clima</td>
+              <td><span class="check-yes">✓</span> Básicos</td>
+              <td><span class="check-yes">✓</span> Todos</td>
+              <td><span class="check-yes">✓</span> Todos</td>
+              <td><span class="check-yes">✓</span> Personalizados</td>
+            </tr>
+            <tr>
+              <td>Agendamento Inteligente por Horário/Dias</td>
+              <td><span class="check-no">✕</span></td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Avançado</td>
+              <td><span class="check-yes">✓</span> Avançado</td>
+            </tr>
+            <tr>
+              <td>QR Code Metrics & Links Dinâmicos</td>
+              <td><span class="check-no">✕</span></td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Sim</td>
+            </tr>
+
+            <!-- CATEGORIA 3: SUPORTE E SEGURANÇA -->
+            <tr class="category-header">
+              <td colspan="5">🔒 Administração, API & Suporte</td>
+            </tr>
+            <tr>
+              <td>Gestão Multi-Lojas e Grupos de Telas</td>
+              <td><span class="check-no">✕</span></td>
+              <td><span class="check-no">✕</span></td>
+              <td><span class="check-yes">✓</span> Sim</td>
+              <td><span class="check-yes">✓</span> Multi-Tenant</td>
+            </tr>
+            <tr>
+              <td>Personalização Whitelabel & Domínio Próprio</td>
+              <td><span class="check-no">✕</span></td>
+              <td><span class="check-no">✕</span></td>
+              <td><span class="check-no">✕</span></td>
+              <td><span class="check-yes">✓</span> Whitelabel Total</td>
+            </tr>
+            <tr>
+              <td>Suporte Técnico</td>
+              <td>E-mail</td>
+              <td>WhatsApp Prioritário</td>
+              <td>Dedicado 24/7</td>
+              <td>Gerente Exclusivo VIP</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
   </section>
 
-  <!-- FOOTER 360STUDIO -->
-  <footer style="border-top: 1px solid var(--border-subtle); padding: 3rem 6%; text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 4rem;">
-    <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 1rem;">
-      <span class="logo-dot"></span>
-      <span style="font-weight: 800; color: #fff; font-size: 1.3rem;" class="gradient-text">TvCorp Studio 360</span>
+  <!-- DÚVIDAS FREQUENTES (FAQ) -->
+  <section style="padding: 4rem 6%; max-width: 900px; margin: 0 auto; text-align: center;">
+    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Dúvidas Frequentes</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2rem;">Tudo o que você precisa saber para começar a usar o TvCorp hoje mesmo.</p>
+
+    <div class="faq-container">
+      <div class="faq-card">
+        <button class="faq-head" onclick="toggleFaqHome(this)">
+          Preciso comprar um equipamento de hardware caro para usar o TvCorp?
+          <span>+</span>
+        </button>
+        <div class="faq-body">
+          Não! O player TvCorp roda diretamente no navegador de qualquer Smart TV (Samsung Tizen, LG WebOS, Android TV, TCL) ou em TV Boxes Android e Amazon Fire TV Stick de baixo custo conectados via porta HDMI.
+        </div>
+      </div>
+
+      <div class="faq-card">
+        <button class="faq-head" onclick="toggleFaqHome(this)">
+          Como é feito o pagamento da assinatura?
+          <span>+</span>
+        </button>
+        <div class="faq-body">
+          O pagamento é processado com total segurança através do Mercado Pago. Aceitamos ⚡ PIX Instantâneo (QR Code) e 💳 Cartão de Crédito parcelado com liberação imediata.
+        </div>
+      </div>
+
+      <div class="faq-card">
+        <button class="faq-head" onclick="toggleFaqHome(this)">
+          Como funciona o pareamento da TV com o painel?
+          <span>+</span>
+        </button>
+        <div class="faq-body">
+          É extremamente simples: ao abrir a URL do player na TV (tvcorp.hubdigital360.com/player/), um código de 6 dígitos é exibido. Você entra no seu painel, clica em "Conectar Nova Tela" e digita o código. A tela é pareada instantaneamente!
+        </div>
+      </div>
     </div>
-    <p style="margin-bottom: 1rem;">Plataforma SaaS de Gestão de Mídia Indoor & TV Corporativa Inteligente.</p>
-    <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 1.5rem;">
+  </section>
+
+  <!-- FOOTER COM MARCA PURA "TvCorp" -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 3.5rem 6%; text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 4rem;">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 1rem;">
+      <span class="logo-dot"></span>
+      <span style="font-weight: 800; color: #fff; font-size: 1.3rem;" class="gradient-text">TvCorp</span>
+    </div>
+    <p style="margin-bottom: 1rem;">A Plataforma Inteligente de TV Corporativa & Mídia Indoor.</p>
+    <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 1.5rem; flex-wrap: wrap;">
       <a href="index.html" style="color: var(--text-muted);">Home</a>
+      <a href="#recursos" style="color: var(--text-muted);">Recursos</a>
+      <a href="#planos" style="color: var(--text-muted);">Planos</a>
       <a href="help.html" style="color: var(--text-muted);">Tutoriais & Ajuda</a>
       <a href="login.html" style="color: var(--text-muted);">Área do Cliente</a>
       <a href="admin.html" style="color: var(--text-muted);">Painel Admin</a>
     </div>
     <p style="font-size: 0.8rem; color: rgba(255,255,255,0.4);">© 2026 TvCorp. Todos os direitos reservados. Integrado com Mercado Pago API.</p>
   </footer>
+
+  <script>
+    function toggleFaqHome(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('active');
+      document.querySelectorAll('.faq-card').forEach(el => el.classList.remove('active'));
+      if (!isOpen) {
+        item.classList.add('active');
+        btn.querySelector('span').innerText = '−';
+      } else {
+        btn.querySelector('span').innerText = '+';
+      }
+    }
+
+    function setBilling(mode) {
+      const btnMonthly = document.getElementById('btnMonthly');
+      const btnAnnual = document.getElementById('btnAnnual');
+
+      const priceStart = document.getElementById('priceStart');
+      const pricePro = document.getElementById('pricePro');
+      const priceEnterprise = document.getElementById('priceEnterprise');
+      const priceMaster = document.getElementById('priceMaster');
+
+      if (mode === 'annual') {
+        btnMonthly.classList.remove('active');
+        btnAnnual.classList.add('active');
+
+        if (priceStart) priceStart.innerHTML = 'R$ 31<span style="font-size: 1rem; color: var(--text-muted);">/mês no Anual</span>';
+        if (pricePro) pricePro.innerHTML = 'R$ 71<span style="font-size: 1rem; color: var(--text-muted);">/mês no Anual</span>';
+        if (priceEnterprise) priceEnterprise.innerHTML = 'R$ 159<span style="font-size: 1rem; color: var(--text-muted);">/mês no Anual</span>';
+        if (priceMaster) priceMaster.innerHTML = 'R$ 319<span style="font-size: 1rem; color: var(--text-muted);">/mês no Anual</span>';
+      } else {
+        btnAnnual.classList.remove('active');
+        btnMonthly.classList.add('active');
+
+        if (priceStart) priceStart.innerHTML = 'R$ 39<span style="font-size: 1rem; color: var(--text-muted);">/mês</span>';
+        if (pricePro) pricePro.innerHTML = 'R$ 89<span style="font-size: 1rem; color: var(--text-muted);">/mês</span>';
+        if (priceEnterprise) priceEnterprise.innerHTML = 'R$ 199<span style="font-size: 1rem; color: var(--text-muted);">/mês</span>';
+        if (priceMaster) priceMaster.innerHTML = 'R$ 399<span style="font-size: 1rem; color: var(--text-muted);">/mês</span>';
+      }
+    }
+  </script>
 
 </body>
 </html>

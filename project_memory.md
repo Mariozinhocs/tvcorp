@@ -1,34 +1,32 @@
 # Memória do Projeto: TvCorp — Plataforma SaaS de TV Corporativa
 
-> **Status Atual:** 100% Operacional (Padrão HubDigital360)  
-> **Última Atualização:** 17 de Agosto de 2026  
-> **Squad:** A-Team (PO: Mario Henrique / Agent: Antigravity AI)
+> **Status Atual:** 100% Operacional (Benchmark ScreenCloud & 360Studio)  
+> **Última Atualização:** 18 de Agosto de 2026  
+> **Squad:** A-Team (PO: Mario Henrique / Agent: Antigravity AI)  
+> **Tagline Oficial:** *"TvCorp — Transforme Suas Smart TVs em Hubs de Comunicação e Mídia Indoor"*
 
 ---
 
-## 📌 1. Visão Geral & Arquitetura de Camadas (Padrão HubDigital360)
+## 📌 1. Visão Geral & Arquitetura de Camadas
 
-O **TvCorp** é um ecossistema SaaS completo para Gestão de Mídia Indoor, Mural Digital, Transmissão em Smart TVs/TV Boxes e Comunicação Interna Corporativa.
+O **TvCorp** é a plataforma inteligente para Gestão de Mídia Indoor, TV Corporativa, Mural Digital, Transmissão em Smart TVs/TV Boxes e Comunicação Interna Corporativa, alinhada às melhores práticas dos líderes globais de software (**ScreenCloud**).
 
 ### Camadas de Páginas (HTML5 / Vanilla JS / CSS3 / PHP PDO):
 1. **Landing Page Pública ([`index.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/index.html)):**
-   * Padrão visual HubDigital360 com **Dark Glassmorphism Neon**.
-   * **Simulador de Smart TV em Tempo Real:** Renderização ao vivo de comunicados, widgets de notícias RSS e clima tempo.
-   * **4 Planos em Loop Scroll Infinito:** Esteira animada contínua com *Start* (R$ 39), *Pro* (R$ 89), *Enterprise* (R$ 199) e *Master Franchise* (R$ 399).
-   * Accordion de FAQ interativo e Footer institucional completo.
+   * Nome limpo e unificado **TvCorp** com a Tagline Oficial.
+   * **Menu Superior Alinhado:** Links para *Recursos*, *Casos de Uso*, *Planos*, *Tutoriais & Ajuda*, *Entrar* e *Testar 7 Dias Grátis*.
+   * **Hero Section ScreenCloud-Style:** Badge de destaque, estatísticas chave do player (`99.9% Disponibilidade`, `< 3s Atualização Remota`, `100% Nuvem`).
+   * **Simulador de TV em Tempo Real (Studio CMS):** Renderização de comunicados, widgets RSS ao vivo, hora certa e clima tempo local.
+   * **Vitrine Completa de Recursos:** Pareamento 6 dígitos, Agendamento Inteligente (Smart Scheduling), Widgets RSS/Clima, Instant Takeover de emergência, Print remoto da TV e Gestão Multi-lojas.
+   * **Casos de Uso por Indústria:** Escritórios & Endomarketing, Varejo & Mídia Indoor, Lobbies & Recepções, Indústria & Dashboards.
+   * **Seção de Planos 360Studio + Matriz Comparativa Detalhada:** Seletor Mensal / Anual (-20% desc), 4 Cards (*Start*, *Pro*, *Enterprise*, *Master Franchise*) e Tabela Comparativa de Recursos estilo ScreenCloud.
 2. **Central de Tutoriais & Ajuda ([`help.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/help.html)):**
    * Guias passo a passo para instalação em Samsung Tizen, LG WebOS, Android TV, Fire TV e TV Box.
-   * Manual de pareamento em 6 dígitos, montagem de playlists e solução de dúvidas técnicas com suporte via WhatsApp.
+   * Manual de pareamento em 6 dígitos, montagem de playlists e solução de dúvidas técnicas.
 3. **Área Privada Operacional do Assinante ([`app.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/app.html)):**
-   * Sidebar 360 com 5 abas funcionais:
-     - 🖥️ **Minhas Telas:** Pareamento em 6 dígitos, monitoramento online/offline, print remoto da TV.
-     - 📋 **Playlists & Mídias:** Gestão de conteúdo e ordem de exibição.
-     - 💳 **Minha Assinatura & Faturas:** Visualização do plano ativo, limite de telas, vencimento e checkout Mercado Pago.
-     - ❓ **Tutoriais & Ajuda:** Central de ajuda integrada.
-     - 👤 **Meu Perfil:** Cadastro e empresa.
+   * Sidebar 360Studio com 5 abas funcionais (*Minhas Telas*, *Playlists & Mídias*, *Minha Assinatura*, *Tutoriais & Ajuda*, *Meu Perfil*).
 4. **Painel Administrativo & Gestão SaaS ([`admin.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/admin.html)):**
-   * KPIs SaaS em tempo real (MRR, Total Clientes, Ativos, Trial, Expirados e Telas).
-   * Tabela dinâmica de assinantes alimentada por `api/admin.php` com busca por texto, filtros por status e ações rápidas (Extender Trial +7d, Alterar Plano, Activar/Suspender).
+   * KPIs SaaS em tempo real (MRR, Total Clientes, Ativos, Trial, Expirados e Telas) e gestão de assinaturas via `api/admin.php`.
 5. **Autenticação SaaS ([`login.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/login.html)):**
    * Login e Registro com ativação automática do **Trial Grátis de 7 Dias**.
 6. **Instalador de Banco ([`db_installer.php`](file:///g:/Meu%20Drive/Dev's/TvCorp/db_installer.php)):**
