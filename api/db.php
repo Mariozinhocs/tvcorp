@@ -17,12 +17,19 @@ function getDatabase() {
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
+                username TEXT,
                 email TEXT UNIQUE NOT NULL,
                 password_hash TEXT NOT NULL,
                 company TEXT,
+                role TEXT DEFAULT 'user',
                 created_at TEXT NOT NULL
             );
         ");
+
+        // Adicionar coluna username se não existir
+        try {
+            $db->exec("ALTER TABLE users ADD COLUMN username TEXT;");
+        } catch (Exception $e) {}
 
         // 2. Tabela de Assinaturas e Planos Mercado Pago
         $db->exec("
@@ -99,8 +106,8 @@ function getDatabase() {
             $now = date('Y-m-d H:i:s');
             $passHash = password_hash('admin123', PASSWORD_BCRYPT);
             
-            $stmtInsUser = $db->prepare('INSERT INTO users (name, email, password_hash, company, created_at) VALUES (?, ?, ?, ?, ?)');
-            $stmtInsUser->execute(['Administrador TvCorp', 'admin@tvcorp.com', $passHash, 'TvCorp Inc', $now]);
+            $stmtInsUser = $db->prepare('INSERT INTO users (name, username, email, password_hash, company, role, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
+            $stmtInsUser->execute(['Administrador TvCorp', 'mariozinhocs', 'admin@tvcorp.com', $passHash, 'TvCorp Inc', 'admin', $now]);
             $adminUserId = $db->lastInsertId();
 
             // Ativar plano ilimitado para a conta admin padrão

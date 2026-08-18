@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $data = json_decode(file_get_contents("php://input"), true);
 $name = isset($data['name']) ? trim($data['name']) : '';
+$username = isset($data['username']) ? trim($data['username']) : '';
 $email = isset($data['email']) ? trim(strtolower($data['email'])) : '';
 $password = isset($data['password']) ? trim($data['password']) : '';
 $company = isset($data['company']) ? trim($data['company']) : '';
@@ -23,17 +24,18 @@ if (empty($name) || empty($email) || empty($password)) {
 $db = getDatabaseConnection();
 
 try {
-    $stmtCheck = $db->prepare("SELECT COUNT(*) as count FROM users WHERE email = ?");
-    $stmtCheck->execute([$email]);
+    $stmtCheck = $db->prepare("SELECT COUNT(*) as count FROM users WHERE email = ? OR (username = ? AND username != '')");
+    $stmtCheck->execute([$email, $username]);
     if ($stmtCheck->fetch()['count'] > 0) {
         http_response_code(400);
-        echo json_encode(["error" => "Já existe uma conta cadastrada com este e-mail"]);
+        echo json_encode(["error" => "Já existe uma conta cadastrada com este e-mail ou nome de usuário"]);
         exit;
     }
 
     $passHash = password_hash($password, PASSWORD_BCRYPT);
-    $stmtUser = $db->prepare("INSERT INTO users (name, email, password_hash, company, role) VALUES (?, ?, ?, ?, 'user')");
-    $stmtUser->execute([$name, $email, $passHash, $company]);
+    $stmtUser = $db->prepare("INSERT INTO users (name, username, email, password_hash, company, role, created_at) VALUES (?, ?, ?, ?, ?, 'user', ?)");
+    $now = date('Y-m-d H:i:s');
+    $stmtUser->execute([$name, $username, $email, $passHash, $company, $now]);
     $userId = intval($db->lastInsertId());
 
     // Ativar Trial de 7 Dias
@@ -48,6 +50,7 @@ try {
         "user" => [
             "id" => $userId,
             "name" => $name,
+            "username" => $username,
             "email" => $email,
             "company" => $company,
             "role" => "user"

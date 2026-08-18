@@ -11,6 +11,12 @@
 
 O **TvCorp** é a plataforma inteligente para Gestão de Mídia Indoor, TV Corporativa, Mural Digital, Transmissão em Smart TVs/TV Boxes e Comunicação Interna Corporativa, alinhada às melhores práticas dos líderes globais de software (**ScreenCloud**).
 
+### Credenciais Padrão do Super Admin:
+* **E-mail:** `admin@tvcorp.com`
+* **Usuário:** `mariozinhocs`
+* **Senha:** `admin123`
+* **Painel Admin:** [`admin.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/admin.html)
+
 ### Camadas de Páginas (HTML5 / Vanilla JS / CSS3 / PHP PDO):
 1. **Landing Page Pública ([`index.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/index.html)):**
    * Nome limpo e unificado **TvCorp** com a Tagline Oficial.
@@ -28,7 +34,7 @@ O **TvCorp** é a plataforma inteligente para Gestão de Mídia Indoor, TV Corpo
 4. **Painel Administrativo & Gestão SaaS ([`admin.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/admin.html)):**
    * KPIs SaaS em tempo real (MRR, Total Clientes, Ativos, Trial, Expirados e Telas) e gestão de assinaturas via `api/admin.php`.
 5. **Autenticação SaaS ([`login.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/login.html)):**
-   * Login e Registro com ativação automática do **Trial Grátis de 7 Dias**.
+   * Tela de Registro reformulada com campos *Nome Completo*, *Nome de Usuário*, *E-mail*, *Senha* e ativação automática do **Trial Grátis de 7 Dias**.
 6. **Instalador de Banco ([`db_installer.php`](file:///g:/Meu%20Drive/Dev's/TvCorp/db_installer.php)):**
    * Instalador Web automático para criação/migração de tabelas no banco de dados.
 
@@ -46,7 +52,7 @@ O **TvCorp** é a plataforma inteligente para Gestão de Mídia Indoor, TV Corpo
 * 🧪 **Homologação (`/hml`):** [https://tvcorp.hubdigital360.com/hml/index.html](https://tvcorp.hubdigital360.com/hml/index.html)
 * 🎬 **Player Homologação:** [https://tvcorp.hubdigital360.com/hml/player/](https://tvcorp.hubdigital360.com/hml/player/)
 * 🌐 **Produção (Raiz `/`):** [https://tvcorp.hubdigital360.com/index.html](https://tvcorp.hubdigital360.com/index.html)
-* 🎬 **Player Produção:** [https://tvcorp.hubdigital360.com/player/](https://tvcorp.hubdigital360.com/player/)
+* 🎬 **Player Produção:** [https://tvcorp.hubdigital360.com/index.html](https://tvcorp.hubdigital360.com/index.html)
 
 ---
 
