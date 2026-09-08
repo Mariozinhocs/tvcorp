@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 date_default_timezone_set('America/Sao_Paulo');
 
-$sqlitePath = __DIR__ . '/tvcorp.sqlite';
+$sqlitePath = __DIR__ . '/tvcorp.db';
 
 function getDatabaseConnection() {
     global $sqlitePath;
@@ -22,6 +22,9 @@ function getDatabaseConnection() {
         $db = new PDO("sqlite:" . $sqlitePath);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        try {
+            $db->exec("ALTER TABLE users ADD COLUMN username TEXT;");
+        } catch (Exception $e) {}
         return $db;
     } catch (PDOException $e) {
         http_response_code(500);

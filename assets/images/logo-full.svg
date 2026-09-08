@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tvPink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF007A" />
+      <stop offset="100%" stop-color="#E11D48" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFC000" />
+      <stop offset="100%" stop-color="#FF9500" />
+    </linearGradient>
+    <filter id="bannerShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Yellow Slanted Banner Block -->
+  <path d="M 96 38 H 375 L 354 102 H 96 Z" fill="url(#goldGrad)" filter="url(#bannerShadow)" />
+  
+  <!-- Banner Text "TvCorp" -->
+  <text x="125" y="85" font-family="'Outfit', 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="52" fill="#0A0F1D" letter-spacing="-1">TvCorp</text>
+
+  <!-- Left TV Icon -->
+  <g filter="url(#bannerShadow)">
+    <!-- Antennas -->
+    <path d="M 40 18 L 60 36 L 80 18" fill="none" stroke="url(#tvPink)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- TV Outer Body -->
+    <rect x="18" y="34" width="84" height="70" rx="18" ry="18" fill="url(#tvPink)" />
+    <!-- Inner White Display -->
+    <rect x="28" y="44" width="64" height="50" rx="10" ry="10" fill="#FFFFFF" />
+    <!-- Play Button Triangle -->
+    <path d="M 52 56 L 72 69 L 52 82 Z" fill="url(#tvPink)" stroke-linejoin="round" />
+  </g>
+</svg>

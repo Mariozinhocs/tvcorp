@@ -265,7 +265,7 @@ export default function SubscriptionModal({ isOpen, onClose, user, subscription,
                   <input
                     type="text"
                     name="holder"
-                    placeholder="MARIO HENRIQUE"
+                    placeholder="NOME COMO NO CARTÃO"
                     value={cardForm.holder}
                     onChange={handleCardFormChange}
                     required

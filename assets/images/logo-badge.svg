@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tvPinkBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF007A" />
+      <stop offset="100%" stop-color="#E11D48" />
+    </linearGradient>
+    <linearGradient id="goldBadgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFC000" />
+      <stop offset="100%" stop-color="#FF9500" />
+    </linearGradient>
+    <filter id="badgeShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <g filter="url(#badgeShadow)">
+    <circle cx="256" cy="256" r="230" fill="#0A0F1D" stroke="url(#goldBadgeGrad)" stroke-width="10" />
+    
+    <!-- Slanted Gold Banner -->
+    <path d="M 120 220 H 420 L 390 320 H 120 Z" fill="url(#goldBadgeGrad)" />
+    <text x="250" y="292" font-family="'Outfit', 'Sora', sans-serif" font-weight="900" font-size="76" fill="#0A0F1D" letter-spacing="-2">TvCorp</text>
+
+    <!-- TV Play Icon floating on left -->
+    <g transform="translate(48, 175) scale(1.4)">
+      <path d="M 40 18 L 60 36 L 80 18" fill="none" stroke="url(#tvPinkBadge)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
+      <rect x="18" y="34" width="84" height="70" rx="18" ry="18" fill="url(#tvPinkBadge)" />
+      <rect x="28" y="44" width="64" height="50" rx="10" ry="10" fill="#FFFFFF" />
+      <path d="M 52 56 L 72 69 L 52 82 Z" fill="url(#tvPinkBadge)" stroke-linejoin="round" />
+    </g>
+  </g>
+</svg>

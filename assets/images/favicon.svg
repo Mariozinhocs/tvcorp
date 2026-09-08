@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tvPinkFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF007A" />
+      <stop offset="100%" stop-color="#E11D48" />
+    </linearGradient>
+  </defs>
+  <!-- Dark circle background for max visibility in browser tabs -->
+  <circle cx="64" cy="64" r="62" fill="#0A0F1D" stroke="#FFC000" stroke-width="4" />
+  <!-- Antennas -->
+  <path d="M 48 24 L 64 38 L 80 24" fill="none" stroke="url(#tvPinkFav)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- TV Body -->
+  <rect x="22" y="36" width="84" height="72" rx="18" ry="18" fill="url(#tvPinkFav)" />
+  <!-- White Inner Display -->
+  <rect x="32" y="46" width="64" height="52" rx="10" ry="10" fill="#FFFFFF" />
+  <!-- Play Button Triangle -->
+  <path d="M 56 59 L 77 72 L 56 85 Z" fill="url(#tvPinkFav)" stroke-linejoin="round" />
+</svg>

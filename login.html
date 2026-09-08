@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TvCorp — Autenticação SaaS (E-mail ou Usuário)</title>
   
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔑</text></svg>">
+  <!-- Favicon Oficial TvCorp -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -17,36 +20,97 @@
 
   <style>
     body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #0B0F19 !important;
+      background: radial-gradient(circle at 10% 10%, #1A163B 0%, #070913 80%) !important;
+      color: #FFFFFF !important;
+      font-family: var(--font-main);
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR ALTO CONTRASTE */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 6%;
+      background: rgba(11, 15, 25, 0.9) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: transform 0.25s ease;
+    }
+    .brand-logo:hover {
+      transform: scale(1.03);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      color: #E2E8F0 !important;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    .nav-links a:hover {
+      color: #FFC000 !important;
+    }
+
+    /* CONTAINER DO CARD */
+    .auth-container {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      background: var(--bg-gradient);
-      padding: 1.5rem;
+      padding: 3rem 1.5rem;
+      position: relative;
+      z-index: 2;
     }
+
     .auth-card {
       width: 100%;
       max-width: 460px;
       padding: 2.75rem 2.25rem;
-      background: rgba(18, 16, 46, 0.65);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border-hover);
+      background: #111726 !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
       border-radius: 24px;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.75);
+      position: relative;
+      z-index: 3;
     }
+
     .auth-header {
       margin-bottom: 2rem;
+      text-align: center;
     }
     .auth-header h1 {
       font-family: var(--font-heading);
       font-size: 2.1rem;
       font-weight: 800;
-      color: #fff;
+      color: #FFFFFF !important;
       margin-bottom: 6px;
     }
     .auth-header p {
-      color: var(--text-muted);
+      color: #94A3B8 !important;
       font-size: 0.95rem;
     }
 
@@ -57,10 +121,10 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.6px;
-      color: #8b8a9f;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: #CBD5E1 !important;
       text-transform: uppercase;
       margin-bottom: 8px;
     }
@@ -69,17 +133,23 @@
       width: 100%;
       padding: 14px 18px;
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.04);
-      color: #fff;
-      font-size: 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.16) !important;
+      background: #1A2337 !important;
+      color: #FFFFFF !important;
+      font-size: 0.98rem;
+      font-weight: 500;
       transition: all 0.2s ease;
+      box-sizing: border-box;
+    }
+    .form-input-custom::placeholder {
+      color: #64748B !important;
+      opacity: 1;
     }
     .form-input-custom:focus {
       outline: none;
-      border-color: var(--primary);
-      background: rgba(255, 255, 255, 0.07);
-      box-shadow: 0 0 15px var(--primary-glow);
+      border-color: #7B61FF !important;
+      background: #202B44 !important;
+      box-shadow: 0 0 18px rgba(123, 97, 255, 0.45) !important;
     }
 
     .btn-submit-custom {
@@ -87,11 +157,11 @@
       padding: 15px;
       border-radius: 14px;
       border: none;
-      background: #ffffff;
-      color: #03020c;
+      background: linear-gradient(135deg, #7B61FF 0%, #E11D48 100%) !important;
+      color: #FFFFFF !important;
       font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1rem;
+      font-weight: 800;
+      font-size: 1.05rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -99,47 +169,67 @@
       gap: 10px;
       margin-top: 1.75rem;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 30px rgba(225, 29, 72, 0.4);
     }
     .btn-submit-custom:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(255, 255, 255, 0.25);
-      background: #f0eeff;
+      box-shadow: 0 15px 35px rgba(225, 29, 72, 0.6);
+      filter: brightness(1.15);
     }
 
     .alert-msg {
-      padding: 12px 16px;
+      padding: 14px 18px;
       border-radius: 12px;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
+      font-weight: 700;
       margin-bottom: 1.5rem;
       text-align: center;
       display: none;
     }
     .alert-msg.error {
-      background: rgba(255, 59, 48, 0.15);
-      border: 1px solid rgba(255, 59, 48, 0.3);
-      color: #ff3b30;
+      background: rgba(239, 68, 68, 0.22) !important;
+      border: 1px solid #EF4444 !important;
+      color: #FCA5A5 !important;
     }
     .alert-msg.success {
-      background: rgba(0, 255, 102, 0.15);
-      border: 1px solid rgba(0, 255, 102, 0.3);
-      color: #00ff66;
+      background: rgba(16, 185, 129, 0.22) !important;
+      border: 1px solid #10B981 !important;
+      color: #6EE7B7 !important;
     }
   </style>
 </head>
 <body>
 
-  <div class="auth-card fade-in">
-    
-    <!-- HEADER DO FORMULÁRIO -->
-    <div class="auth-header">
-      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
-        <span class="logo-dot"></span>
-        <span class="gradient-text" style="font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem;">TvCorp</span>
+  <!-- NAVBAR PADRÃO HOME -->
+  <nav class="navbar">
+    <a href="index.html" class="brand-logo">
+      <img src="assets/images/logo-full.svg" alt="TvCorp Logo" style="height: 38px; width: auto;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#recursos">Recursos</a></li>
+      <li><a href="index.html#planos">Planos</a></li>
+      <li><a href="help.html">Tutoriais & Ajuda</a></li>
+      <li><a href="login.html" style="color: #fff;">Entrar</a></li>
+      <li><a href="login.html?register=true" class="btn-primary" style="padding: 10px 20px; font-size: 0.85rem;">Testar 7 Dias Grátis 🚀</a></li>
+    </ul>
+  </nav>
+
+  <!-- LUZES DE AMBIENTE -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <div class="auth-container">
+    <div class="auth-card fade-in">
+      
+      <!-- HEADER DO FORMULÁRIO -->
+      <div class="auth-header">
+        <a href="index.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 1.25rem; text-decoration: none;">
+          <img src="assets/images/logo-full.svg" alt="TvCorp Logo" style="height: 48px; width: auto;">
+        </a>
+        <h1 id="formTitle">Entrar na sua conta</h1>
+        <p id="formSubtitle">Acesse o painel do assinante TvCorp</p>
       </div>
-      <h1 id="formTitle">Entrar na sua conta</h1>
-      <p id="formSubtitle">Acesse o painel do assinante TvCorp</p>
-    </div>
 
     <!-- MENSAGEM DE ALERTA -->
     <div id="alertMsg" class="alert-msg"></div>
@@ -171,7 +261,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           E-MAIL OU NOME DE USUÁRIO
         </label>
-        <input type="text" id="inputEmail" class="form-input-custom" placeholder="Ex: mariozinhocs ou seuemail@empresa.com" required autocomplete="username">
+        <input type="text" id="inputEmail" class="form-input-custom" placeholder="Ex: usuario ou seuemail@empresa.com" required autocomplete="username">
       </div>
 
       <!-- CAMPO SENHA -->
@@ -199,6 +289,7 @@
       <a href="index.html" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">← Voltar para a Página Inicial</a>
     </div>
   </div>
+</div>
 
   <script>
     let isRegisterMode = false;
@@ -249,7 +340,7 @@
         groupName.style.display = 'none';
         groupUsername.style.display = 'none';
         labelLoginInput.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> E-MAIL OU NOME DE USUÁRIO`;
-        inputEmail.placeholder = 'Ex: mariozinhocs ou seuemail@empresa.com';
+        inputEmail.placeholder = 'Ex: usuario ou seuemail@empresa.com';
         btnSubmit.innerText = 'Entrar no Painel ⚡';
         footerQuestion.innerText = 'Ainda não tem conta?';
         footerAction.innerText = 'Criar conta';

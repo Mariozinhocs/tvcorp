@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../db.php';
 header("Content-Type: application/json; charset=UTF-8");
 
 $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 1;
 
-$db = getDatabaseConnection();
+$db = getDatabase();
 
 try {
     $stmt = $db->prepare("SELECT id, name, email, company, role, created_at FROM users WHERE id = ?");

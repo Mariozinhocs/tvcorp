@@ -1,15 +1,15 @@
 # Memória do Projeto: TvCorp — Plataforma SaaS de TV Corporativa
 
 > **Status Atual:** 100% Operacional (Benchmark ScreenCloud & 360Studio)  
-> **Última Atualização:** 18 de Agosto de 2026  
-> **Squad:** A-Team (PO: Mario Henrique / Agent: Antigravity AI)  
+> **Última Atualização:** 08 de Setembro de 2026  
+> **Squad:** A-Team (PO: Product Owner / Agent: Antigravity AI)  
 > **Tagline Oficial:** *"TvCorp — Transforme Suas Smart TVs em Hubs de Comunicação e Mídia Indoor"*
 
 ---
 
 ## 📌 1. Visão Geral & Arquitetura de Camadas
 
-O **TvCorp** é a plataforma inteligente para Gestão de Mídia Indoor, TV Corporativa, Mural Digital, Transmissão em Smart TVs/TV Boxes e Comunicação Interna Corporativa, alinhada às melhores práticas dos líderes globais de software (**ScreenCloud**).
+O **TvCorp** é a plataforma inteligente para Gestão de Mídia Indoor, TV Corporativa, Mural Digital, Transmissão em Smart TVs/TV Boxes e Comunicação Interna Corporativa, alinhada às melhores práticas dos líderes globais de software (**ScreenCloud** & **Anorak Technology**).
 
 ### Credenciais Padrão do Super Admin:
 * **E-mail:** `admin@tvcorp.com`
@@ -19,13 +19,14 @@ O **TvCorp** é a plataforma inteligente para Gestão de Mídia Indoor, TV Corpo
 
 ### Camadas de Páginas (HTML5 / Vanilla JS / CSS3 / PHP PDO):
 1. **Landing Page Pública ([`index.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/index.html)):**
-   * Nome limpo e unificado **TvCorp** com a Tagline Oficial.
-   * **Menu Superior Alinhado:** Links para *Recursos*, *Casos de Uso*, *Planos*, *Tutoriais & Ajuda*, *Entrar* e *Testar 7 Dias Grátis*.
-   * **Hero Section ScreenCloud-Style:** Badge de destaque, estatísticas chave do player (`99.9% Disponibilidade`, `< 3s Atualização Remota`, `100% Nuvem`).
+   * Nome limpo e unificado **TvCorp** com a Tagline Oficial e estética **Anoraks Technology Studio**.
+   * **Menu Superior Alinhado Glassmorphic (Fixado no Topo):** Links para *Plataformas*, *Engenharia & Recursos*, *Casos de Uso*, *Planos*, *Tutoriais & Ajuda*, *Entrar*, *Testar 7 Dias Grátis* e botão flutuante *Back to Top*.
+   * **Hero Section Anorak Benchmark:** Eyebrow pill badge (`⚡ SMART TV & DIGITAL SIGNAGE PLATFORM`), título de alta conversão, subtítulo focado em estabilidade (Offline-first, <3s atualização) e barra de ecossistema de hardware (Samsung Tizen, LG webOS, Android TV, Fire TV, Windows).
+   * **Barra de Estatísticas chave:** `99.9% Disponibilidade`, `< 3s Atualização Remota`, `100% Nuvem e Offline-First`.
    * **Simulador de TV em Tempo Real (Studio CMS):** Renderização de comunicados, widgets RSS ao vivo, hora certa e clima tempo local.
-   * **Vitrine Completa de Recursos:** Pareamento 6 dígitos, Agendamento Inteligente (Smart Scheduling), Widgets RSS/Clima, Instant Takeover de emergência, Print remoto da TV e Gestão Multi-lojas.
+   * **Grid de Recursos & Engenharia Anorak:** Pareamento 6 dígitos, Agendamento Inteligente (Smart Scheduling), Feeds RSS/Clima, Instant Takeover de emergência, Print remoto/Proof of Play e Gestão Multi-lojas.
    * **Casos de Uso por Indústria:** Escritórios & Endomarketing, Varejo & Mídia Indoor, Lobbies & Recepções, Indústria & Dashboards.
-   * **Seção de Planos 360Studio + Matriz Comparativa Detalhada:** Seletor Mensal / Anual (-20% desc), 4 Cards (*Start*, *Pro*, *Enterprise*, *Master Franchise*) e Tabela Comparativa de Recursos estilo ScreenCloud.
+   * **Seção de Planos 360Studio + Matriz Comparativa Detalhada:** Seletor Mensal / Anual (-20% desc), 4 Cards (*Start*, *Pro*, *Enterprise*, *Master Franchise*) e Tabela Comparativa de Recursos estilo ScreenCloud/Anorak.
 2. **Central de Tutoriais & Ajuda ([`help.html`](file:///g:/Meu%20Drive/Dev's/TvCorp/help.html)):**
    * Guias passo a passo para instalação em Samsung Tizen, LG WebOS, Android TV, Fire TV e TV Box.
    * Manual de pareamento em 6 dígitos, montagem de playlists e solução de dúvidas técnicas.

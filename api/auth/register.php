@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../db.php';
 header("Content-Type: application/json; charset=UTF-8");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -21,7 +21,7 @@ if (empty($name) || empty($email) || empty($password)) {
     exit;
 }
 
-$db = getDatabaseConnection();
+$db = getDatabase();
 
 try {
     $stmtCheck = $db->prepare("SELECT COUNT(*) as count FROM users WHERE email = ? OR (username = ? AND username != '')");

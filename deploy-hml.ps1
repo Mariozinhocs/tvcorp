@@ -53,6 +53,8 @@ Create-FtpDirectory -uri "$baseUri/js"
 Create-FtpDirectory -uri "$baseUri/player"
 Create-FtpDirectory -uri "$baseUri/api"
 Create-FtpDirectory -uri "$baseUri/api/auth"
+Create-FtpDirectory -uri "$baseUri/assets"
+Create-FtpDirectory -uri "$baseUri/assets/images"
 
 # 2. Upload de Arquivos Raiz
 Upload-FtpFile -localFile "$PSScriptRoot/index.html" -remoteUri "$baseUri/index.html"
@@ -70,6 +72,11 @@ Get-ChildItem "$PSScriptRoot/css" -File | ForEach-Object {
 # 4. Upload JS
 Get-ChildItem "$PSScriptRoot/js" -File | ForEach-Object {
     Upload-FtpFile -localFile $_.FullName -remoteUri "$baseUri/js/$($_.Name)"
+}
+
+# Upload Assets (Logos & Favicons)
+Get-ChildItem "$PSScriptRoot/assets/images" -File | ForEach-Object {
+    Upload-FtpFile -localFile $_.FullName -remoteUri "$baseUri/assets/images/$($_.Name)"
 }
 
 # 5. Upload Player

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../db.php';
 header("Content-Type: application/json; charset=UTF-8");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -18,10 +18,10 @@ if (empty($loginInput) || empty($password)) {
     exit;
 }
 
-$db = getDatabaseConnection();
+$db = getDatabase();
 
 try {
-    $stmt = $db->prepare("SELECT * FROM users WHERE email = ? OR username = ? LIMIT 1");
+    $stmt = $db->prepare("SELECT * FROM users WHERE email = ? OR (username IS NOT NULL AND username = ?) LIMIT 1");
     $stmt->execute([strtolower($loginInput), $loginInput]);
     $user = $stmt->fetch();
 

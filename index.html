@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TvCorp — Transforme Suas Smart TVs em Hubs de Comunicação e Mídia Indoor</title>
-  <meta name="description" content="TvCorp é a plataforma inteligente para gestão de telas corporativas, playlists reativas, notícias RSS ao vivo, alertas de emergência e mídia indoor.">
+  <title>TvCorp — Smart TV & Digital Signage Engineering Platform</title>
+  <meta name="description" content="TvCorp é a plataforma de alta confiabilidade para gestão de telas corporativas, mídia indoor, playlists reativas, feeds RSS ao vivo e alertas de emergência.">
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>">
+  <!-- Favicon Oficial TvCorp -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 
-  <!-- Google Fonts (Sora + Outfit + JetBrains Mono) -->
+  <!-- Google Fonts (Poppins + Inter + Sora + Outfit) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
@@ -21,24 +23,29 @@
   <link rel="stylesheet" href="css/animations.css">
 
   <style>
+    body {
+      font-family: 'Poppins', 'Outfit', sans-serif;
+    }
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.25rem 6%;
-      background: rgba(18, 16, 46, 0.4);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      position: sticky;
+      padding: 1.15rem 6%;
+      background: rgba(3, 2, 12, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: fixed;
       top: 0;
-      z-index: 100;
+      left: 0;
+      right: 0;
+      z-index: 1000;
       border-bottom: 1px solid var(--border-subtle);
     }
     .brand-logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-family: var(--font-heading);
+      font-family: 'Sora', sans-serif;
       font-size: 1.5rem;
       font-weight: 800;
       color: #fff;
@@ -54,32 +61,35 @@
       font-weight: 500;
       font-size: 0.95rem;
       transition: color 0.2s ease;
+      text-decoration: none;
     }
     .nav-links a:hover {
       color: #fff;
     }
 
     .hero-section {
-      padding: 5rem 6% 3.5rem;
+      padding: 7.5rem 6% 4rem;
       text-align: center;
-      max-width: 1020px;
+      max-width: 1080px;
       margin: 0 auto;
     }
     .hero-title {
-      font-family: var(--font-heading);
-      font-size: 3.6rem;
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
       line-height: 1.15;
       font-weight: 800;
       margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
     }
     .hero-desc {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: var(--text-muted);
       margin-bottom: 2.5rem;
-      max-width: 800px;
+      max-width: 820px;
       margin-left: auto;
       margin-right: auto;
-      line-height: 1.6;
+      line-height: 1.65;
+      font-family: 'Inter', sans-serif;
     }
     .hero-cta {
       display: flex;
@@ -88,24 +98,36 @@
       flex-wrap: wrap;
     }
 
-    /* MARQUEE INFINITY SCROLL LOOP (360STUDIO) */
+    /* MARQUEE CARDS PLANOS */
     .marquee-wrapper {
       overflow: hidden;
       width: 100%;
       position: relative;
       padding: 2rem 0;
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+    .marquee-track {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
     }
     .price-card {
-      width: 310px;
+      width: 280px;
       flex-shrink: 0;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 2.25rem;
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 1.75rem;
       text-align: left;
       position: relative;
+      transition: all 0.3s ease;
+    }
+    .price-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
     }
     .price-card.featured {
       border-color: var(--primary);
@@ -113,7 +135,7 @@
       background: rgba(123, 97, 255, 0.06);
     }
     .price-val {
-      font-family: var(--font-heading);
+      font-family: 'Sora', sans-serif;
       font-size: 2.4rem;
       font-weight: 800;
       color: #fff;
@@ -145,13 +167,15 @@
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
+      font-family: 'Poppins', sans-serif;
     }
     .faq-body {
       padding: 0 1.5rem 1.25rem;
       color: var(--text-muted);
       font-size: 0.95rem;
       display: none;
-      line-height: 1.6;
+      line-height: 1.65;
+      font-family: 'Inter', sans-serif;
     }
     .faq-card.active .faq-body {
       display: block;
@@ -160,51 +184,60 @@
 </head>
 <body>
 
-  <!-- NAVBAR COM MARCA PURA "TvCorp" -->
+  <!-- HEADER NAVIGATION (ANORAK BENCHMARK) -->
   <nav class="navbar">
     <div style="display: flex; align-items: center; gap: 16px;">
       <a href="index.html" class="brand-logo">
-        <span class="logo-dot"></span>
-        <span class="gradient-text">TvCorp</span>
+        <img src="assets/images/logo-full.svg" alt="TvCorp Logo" style="height: 38px; width: auto;">
       </a>
     </div>
 
     <ul class="nav-links">
-      <li><a href="#recursos">Recursos</a></li>
+      <li><a href="#plataformas">Plataformas</a></li>
+      <li><a href="#recursos">Engenharia & Recursos</a></li>
       <li><a href="#casos-de-uso">Casos de Uso</a></li>
       <li><a href="#planos">Planos</a></li>
       <li><a href="help.html">Tutoriais & Ajuda</a></li>
       <li><a href="login.html" style="color: #fff;">Entrar</a></li>
-      <li><a href="login.html?register=true" class="btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">Testar 7 Dias Grátis 🚀</a></li>
+      <li><a href="login.html?register=true" class="btn-primary" style="padding: 10px 22px; font-size: 0.9rem; border-radius: 30px;">Testar 7 Dias Grátis 🚀</a></li>
     </ul>
   </nav>
 
-  <!-- HERO SECTION BENCHMARK SCREENCLOUD -->
+  <!-- HERO SECTION BENCHMARK ANORAK STUDIO -->
   <header class="hero-section fade-in">
-    <div class="hero-badge">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>
-      Plataforma Inteligente de TV Corporativa & Mídia Indoor
-    </div>
+    <span class="eyebrow-label">⚡ SMART TV & DIGITAL SIGNAGE PLATFORM</span>
 
     <h1 class="hero-title">
-      Transforme Suas Smart TVs em <br>
-      <span class="gradient-text">Hubs de Comunicação em Tempo Real</span>
+      Engage Audiences with <br>
+      <span class="gradient-text">Smart TV & Digital Signage Software</span>
     </h1>
 
     <p class="hero-desc">
-      Conecte, crie e controle a programação das suas Smart TVs, TV Boxes e totens de qualquer lugar. Playlists inteligentes, widgets de notícias ao vivo, alertas de emergência em 1 clique e monitoramento remoto.
+      Engenharia de alta confiabilidade para transformar Smart TVs, Android TV e TV Boxes em hubs inteligentes de mídia indoor. Playlists em loop contínuo, pareamento instantâneo em 6 dígitos, feeds RSS ao vivo e controle remoto unificado.
     </p>
 
     <div class="hero-cta">
-      <a href="login.html?register=true" class="btn-primary" style="font-size: 1.1rem; padding: 14px 32px;">
-        Começar Teste Grátis de 7 Dias 🚀
+      <a href="login.html?register=true" class="btn-primary" style="font-size: 1.05rem; padding: 14px 34px; border-radius: 30px;">
+        Iniciar Teste Grátis de 7 Dias 🚀
       </a>
-      <a href="#demo" class="btn-secondary" style="font-size: 1.1rem; padding: 14px 28px;">
-        🎬 Ver Demonstrador Ao Vivo
+      <a href="#demo" class="btn-secondary" style="font-size: 1.05rem; padding: 14px 28px; border-radius: 30px;">
+        🎬 Ver Player em Tempo Real
       </a>
     </div>
 
-    <!-- HERO STATS BAR (BENCHMARK SCREENCLOUD) -->
+    <!-- PLATFORMS ECOSYSTEM BADGES (ANORAK BENCHMARK) -->
+    <div id="plataformas" style="margin-top: 3rem;">
+      <p style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600;">Hardware & Sistemas Suportados Nativamente</p>
+      <div class="platform-pill-grid">
+        <div class="platform-badge">📺 Samsung Tizen (OS 4.0+)</div>
+        <div class="platform-badge">📺 LG webOS (3.0+)</div>
+        <div class="platform-badge">📱 Android TV & Google TV</div>
+        <div class="platform-badge">⚡ Amazon Fire TV Stick</div>
+        <div class="platform-badge">💻 Windows & TV Box HTML5</div>
+      </div>
+    </div>
+
+    <!-- HERO STATS BAR (ANORAK / SCREENCLOUD BENCHMARK) -->
     <div class="hero-stats">
       <div class="stat-item">
         <span class="stat-num" style="color: #00ff66;">99.9%</span>
@@ -212,38 +245,39 @@
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
-        <span class="stat-num" style="color: var(--primary);">&lt; 3s</span>
+        <span class="stat-num" style="color: var(--primary-cyan);">&lt; 3s</span>
         <span class="stat-label">Atualização de Conteúdo Remoto</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
-        <span class="stat-num" style="color: var(--primary-cyan);">100%</span>
-        <span class="stat-label">Nuvem e Sem Hardware Caro</span>
+        <span class="stat-num" style="color: var(--primary);">100%</span>
+        <span class="stat-label">Arquitetura Nuvem e Offline-First</span>
       </div>
     </div>
   </header>
 
   <!-- SIMULADOR AO VIVO DE TV CORPORATIVA (STUDIO CMS DEMO) -->
-  <section id="demo" style="padding: 3rem 6%; text-align: center; max-width: 1080px; margin: 0 auto;">
-    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Demonstrador do Player em Tempo Real</h2>
-    <p style="color: var(--text-muted); margin-bottom: 2rem;">Veja como o TvCorp renderiza comunicados, widgets e vídeos em Full HD/4K nativamente.</p>
+  <section id="demo" style="padding: 4rem 6%; text-align: center; max-width: 1100px; margin: 0 auto;">
+    <span class="eyebrow-label">LIVE STUDIO SIMULATOR</span>
+    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem; font-family: 'Sora', sans-serif;">Demonstrador do Player em Tempo Real</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">Veja como o TvCorp executa comunicados, widgets dinâmicos e vídeos em 4K nativamente no navegador da TV.</p>
 
-    <div class="glass-panel" style="padding: 1rem; border-radius: var(--radius-xl); border: 1px solid var(--border-glow);">
+    <div class="glass-panel" style="padding: 1.25rem; border-radius: var(--radius-xl); border: 1px solid var(--border-glow);">
       <div style="background: #000; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 16/9; position: relative;">
         <img src="https://images.unsplash.com/photo-1542744094-3a31f103e35f?q=80&w=1200&auto=format&fit=crop" alt="TV Corporativa Demo" style="width: 100%; height: 100%; object-fit: cover;">
         
         <!-- WIDGET SUPERIOR DE HORA E CLIMA -->
-        <div style="position: absolute; top: 20px; right: 20px; background: rgba(3, 2, 12, 0.85); backdrop-filter: blur(8px); padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 0.8rem; color: var(--primary-cyan); font-weight: 700;">☀️ 28°C São Paulo</span>
+        <div style="position: absolute; top: 20px; right: 20px; background: rgba(3, 2, 12, 0.88); backdrop-filter: blur(10px); padding: 8px 18px; border-radius: 30px; border: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 0.82rem; color: var(--primary-cyan); font-weight: 700;">☀️ 28°C São Paulo</span>
           <span style="color: rgba(255,255,255,0.2);">|</span>
-          <span style="font-size: 0.8rem; color: #fff; font-weight: 600;">⏰ 12:15</span>
+          <span style="font-size: 0.82rem; color: #fff; font-weight: 600;">⏰ 12:15</span>
         </div>
 
         <!-- OVERLAY DE TICKER DE NOTÍCIAS RSS AO VIVO -->
-        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(3, 2, 12, 0.92); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle);">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(3, 2, 12, 0.94); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle);">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="background: var(--primary); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.75rem;">AO VIVO</span>
-            <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">📢 COMUNICADO DA DIRETORIA: Reunião Geral de Alinhamento e Metas às 16h</span>
+            <span style="background: var(--primary); color: #fff; padding: 4px 12px; border-radius: 20px; font-weight: 800; font-size: 0.75rem;">AO VIVO</span>
+            <span style="font-weight: 600; color: #fff; font-size: 0.95rem;">📢 COMUNICADO DA DIRETORIA: Reunião Geral de Alinhamento e Metas às 16h</span>
           </div>
           <span class="badge-status online">🟢 PLAYER ONLINE (1080p 60FPS)</span>
         </div>
@@ -251,131 +285,137 @@
     </div>
   </section>
 
-  <!-- VITRINE COMPLETA DE RECURSOS (STUDIO CMS BENCHMARK) -->
+  <!-- GRID DE ENGENHARIA & RECURSOS (ANORAK STUDIO BENCHMARK) -->
   <section id="recursos" style="padding: 5rem 6%; max-width: 1200px; margin: 0 auto;">
-    <div style="text-align: center; margin-bottom: 3.5rem;">
-      <div class="hero-badge" style="margin-bottom: 0.75rem;">
-        ⚡ Recursos de Classe Mundial
-      </div>
-      <h2 style="font-size: 2.5rem;">Tudo o Que Sua Empresa Precisa para Mídia Indoor</h2>
-      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0.5rem auto 0;">
-        Conheça a plataforma criada para simplificar a gestão de qualquer rede de telas corporativas.
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <span class="eyebrow-label">PLATFORM ENGINEERING & FEATURES</span>
+      <h2 style="font-size: 2.5rem; font-family: 'Sora', sans-serif;">Recursos de Classe Mundial para Suas Telas</h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 720px; margin: 0.5rem auto 0;">
+        Construído com foco em resiliência, baixa latência e facilidade de operação para qualquer tamanho de empresa.
       </p>
     </div>
     
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px;">
       
       <!-- RECURSO 1 -->
-      <div class="glass-card">
-        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
-          <span style="color: var(--primary-cyan);">🔑</span> Pareamento em 6 Dígitos
+      <div class="anorak-card">
+        <div class="card-icon-box">🔑</div>
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; font-family: 'Sora', sans-serif;">
+          Pareamento Rápido em 6 Dígitos
         </h3>
-        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
-          Ligue a TV, digite o código de 6 dígitos gerado na tela e conecte seu dispositivo sem configurações complexas de IP ou rede em 10 segundos.
+        <p style="color: var(--text-muted); line-height: 1.65; font-size: 0.95rem; font-family: 'Inter', sans-serif;">
+          Ligue a Smart TV, abra o app e digite o código de 6 dígitos gerado na tela para conectar instantaneamente seu dispositivo ao painel em 10 segundos.
         </p>
       </div>
 
       <!-- RECURSO 2 -->
-      <div class="glass-card">
-        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
-          <span style="color: var(--primary);">📅</span> Agendamento Inteligente (Smart Scheduling)
+      <div class="anorak-card">
+        <div class="card-icon-box">📅</div>
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; font-family: 'Sora', sans-serif;">
+          Agendamento Inteligente (Smart Scheduling)
         </h3>
-        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
-          Agende mídias e avisos por horário, dia da semana ou datas comemorativas específicas com transições suaves e repetição automática.
+        <p style="color: var(--text-muted); line-height: 1.65; font-size: 0.95rem; font-family: 'Inter', sans-serif;">
+          Programe vinhetas, anúncios e comunicados por horários específicos, dias da semana ou datas comemorativas com transições suaves.
         </p>
       </div>
 
       <!-- RECURSO 3 -->
-      <div class="glass-card">
-        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
-          <span style="color: #00ff66;">📰</span> Widgets de Notícias RSS & Clima
+      <div class="anorak-card">
+        <div class="card-icon-box">📰</div>
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; font-family: 'Sora', sans-serif;">
+          Feeds RSS, Clima & Notícias ao Vivo
         </h3>
-        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
-          Mantenha a equipe informada com feeds automáticos de notícias atualizadas em tempo real, cotações de moedas, QR Codes e previsão do tempo.
+        <p style="color: var(--text-muted); line-height: 1.65; font-size: 0.95rem; font-family: 'Inter', sans-serif;">
+          Mantenha sua equipe informada com feeds automáticos de notícias atualizadas, indicadores financeiros, QR Codes e previsão do tempo local.
         </p>
       </div>
 
       <!-- RECURSO 4 -->
-      <div class="glass-card">
-        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
-          <span style="color: #ff3b30;">🚨</span> Instant Takeover (Alertas Urgentes)
+      <div class="anorak-card">
+        <div class="card-icon-box">🚨</div>
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; font-family: 'Sora', sans-serif;">
+          Instant Takeover (Alertas Urgentes)
         </h3>
-        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
-          Interrompa a programação normal instantaneamente para transmitir avisos de emergência, metas batidas ou comunicados urgentes em 1 clique.
+        <p style="color: var(--text-muted); line-height: 1.65; font-size: 0.95rem; font-family: 'Inter', sans-serif;">
+          Interrompa a programação normal em todas as TVs em 1 clique para transmitir alertas de emergência ou conquistas da equipe.
         </p>
       </div>
 
       <!-- RECURSO 5 -->
-      <div class="glass-card">
-        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
-          <span style="color: #f59e0b;">📸</span> Monitoring Remoto & Print da TV
+      <div class="anorak-card">
+        <div class="card-icon-box">📸</div>
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; font-family: 'Sora', sans-serif;">
+          Print Remoto & Proof of Play
         </h3>
-        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
-          Veja exatamente o que está passando em cada Smart TV ou TV Box remota com capturas instantâneas e indicador de sinal online/offline.
+        <p style="color: var(--text-muted); line-height: 1.65; font-size: 0.95rem; font-family: 'Inter', sans-serif;">
+          Monitore o que está passando em cada TV com capturas de tela remotas instantâneas e relatórios auditáveis de exibição.
         </p>
       </div>
 
       <!-- RECURSO 6 -->
-      <div class="glass-card">
-        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;">
-          <span style="color: #ec4899;">🏢</span> Gestão Multi-Lojas & Grupos de Telas
+      <div class="anorak-card">
+        <div class="card-icon-box">🏢</div>
+        <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.25rem; font-family: 'Sora', sans-serif;">
+          Gestão Multi-Lojas & Grupos de Telas
         </h3>
-        <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.95rem;">
-          Organize suas telas por filiais, departamentos ou cidades distintas, enviando conteúdos específicos para cada grupo de telas.
+        <p style="color: var(--text-muted); line-height: 1.65; font-size: 0.95rem; font-family: 'Inter', sans-serif;">
+          Organize sua frota de displays por filiais, setores ou cidades distintas, enviando conteúdos específicos para cada grupo de telas.
         </p>
       </div>
 
     </div>
   </section>
 
-  <!-- SEÇÃO DE CASOS DE USO POR INDÚSTRIA (BENCHMARK SCREENCLOUD) -->
+  <!-- CASOS DE USO POR SETOR (ANORAK BENCHMARK) -->
   <section id="casos-de-uso" style="padding: 4rem 6%; max-width: 1200px; margin: 0 auto;">
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <h2 style="font-size: 2.2rem;">Soluções Desenhadas para o Seu Negócio</h2>
-      <p style="color: var(--text-muted); margin-top: 0.5rem;">Descubra como o TvCorp transforma a comunicação nos mais diversos setores.</p>
+    <div style="text-align: center; margin-bottom: 3.5rem;">
+      <span class="eyebrow-label">INDUSTRY SOLUTIONS</span>
+      <h2 style="font-size: 2.2rem; font-family: 'Sora', sans-serif;">Soluções Desenhadas para o Seu Setor</h2>
+      <p style="color: var(--text-muted); margin-top: 0.5rem;">Descubra como o TvCorp transforma a comunicação nos mais diversos ambientes.</p>
     </div>
 
     <div class="use-cases-grid">
       
       <div class="use-case-card">
-        <span style="font-size: 2rem;">🏢</span>
-        <h3 style="margin: 12px 0 6px; font-size: 1.15rem;">Escritórios & Endomarketing</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
-          Alinhe a equipe com avisos da diretoria, aniversariantes do mês, metas batidas e comunicados de RH.
+        <span style="font-size: 2.2rem; display: block; margin-bottom: 12px;">🏢</span>
+        <h3 style="margin-bottom: 8px; font-size: 1.15rem; font-family: 'Sora', sans-serif;">Escritórios & Endomarketing</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; font-family: 'Inter', sans-serif;">
+          Alinhe colaboradores com comunicados de RH, aniversariantes do mês, metas batidas e mensagens corporativas.
         </p>
       </div>
 
       <div class="use-case-card">
-        <span style="font-size: 2rem;">🛍️</span>
-        <h3 style="margin: 12px 0 6px; font-size: 1.15rem;">Varejo & Mídia Indoor</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
-          Aumente as vendas na loja física exibindo ofertas relâmpago, lançamentos de produtos e vídeos promocionais.
+        <span style="font-size: 2.2rem; display: block; margin-bottom: 12px;">🛍️</span>
+        <h3 style="margin-bottom: 8px; font-size: 1.15rem; font-family: 'Sora', sans-serif;">Varejo & Mídia Indoor</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; font-family: 'Inter', sans-serif;">
+          Aumente vendas no ponto de venda exibindo promoções relâmpago, catálogo digital e novidades em vídeo 4K.
         </p>
       </div>
 
       <div class="use-case-card">
-        <span style="font-size: 2rem;">🏨</span>
-        <h3 style="margin: 12px 0 6px; font-size: 1.15rem;">Lobbies, Clínicas & Hotéis</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
-          Receba visitantes com mensagens personalizadas de boas-vindas, programação de eventos e guias de orientações.
+        <span style="font-size: 2.2rem; display: block; margin-bottom: 12px;">🏨</span>
+        <h3 style="margin-bottom: 8px; font-size: 1.15rem; font-family: 'Sora', sans-serif;">Lobbies, Clínicas & Hotéis</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; font-family: 'Inter', sans-serif;">
+          Receba visitantes com mensagens de boas-vindas, cronograma de eventos, vídeos institucionais e notícias.
         </p>
       </div>
 
       <div class="use-case-card">
-        <span style="font-size: 2rem;">🏭</span>
-        <h3 style="margin: 12px 0 6px; font-size: 1.15rem;">Indústria & Dashboards</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
-          Transmita indicadores de produção em tempo real, alertas de segurança e metas de fábrica no chão de fábrica.
+        <span style="font-size: 2.2rem; display: block; margin-bottom: 12px;">🏭</span>
+        <h3 style="margin-bottom: 8px; font-size: 1.15rem; font-family: 'Sora', sans-serif;">Indústria & Dashboards</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; font-family: 'Inter', sans-serif;">
+          Exiba indicadores de produção em tempo real (KPIs), alertas de segurança de trabalho e metas de fábrica.
         </p>
       </div>
 
     </div>
   </section>
 
-  <!-- SEÇÃO DE PLANOS COM SELETOR MENSAL/ANUAL E TABELA COMPARATIVA -->
+  <!-- PLANOS E PREÇOS (SELETOR MENSAL/ANUAL E COMPARATIVO) -->
   <section id="planos" style="padding: 5rem 0; text-align: center;">
-    <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Planos Transparentes para Qualquer Tamanho de Rede</h2>
-    <p style="color: var(--text-muted); margin-bottom: 2rem;">Comece seu teste grátis de 7 dias sem necessidade de cadastrar cartão de crédito.</p>
+    <span class="eyebrow-label">TRANSPARENT PRICING</span>
+    <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem; font-family: 'Sora', sans-serif;">Planos Flexíveis para Qualquer Tamanho de Rede</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2.5rem;">Comece seu teste grátis de 7 dias sem necessidade de cadastrar cartão de crédito.</p>
 
     <!-- SELETOR FATURAMENTO MENSAL / ANUAL -->
     <div class="billing-toggle-container">
@@ -385,75 +425,75 @@
       </button>
     </div>
 
-    <!-- CARDS DOS PLANOS (360STUDIO STYLE) -->
+    <!-- CARDS DOS PLANOS (ANORAK STYLE) -->
     <div class="marquee-wrapper">
       <div class="marquee-track">
         
         <!-- PLANO 1: START -->
         <div class="price-card">
-          <h3>📱 Plano Start</h3>
-          <p style="color: var(--text-muted); font-size: 0.85rem;">Para pequenas lojas e recepções</p>
+          <h3 style="font-family: 'Sora', sans-serif;">📱 Plano Start</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Para pequenas lojas e recepções</p>
           <div class="price-val" id="priceStart">R$ 39<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
-          <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; font-family: 'Inter', sans-serif;">
             <li>✔ Até 1 Tela Ativa</li>
             <li>✔ Playlists Ilimitadas</li>
             <li>✔ Widgets de Clima & RSS</li>
             <li>✔ Suporte via E-mail</li>
           </ul>
-          <a href="login.html?register=true" class="btn-secondary" style="width: 100%; justify-content: center;">Testar 7 Dias Grátis</a>
+          <a href="login.html?register=true" class="btn-secondary" style="width: 100%; justify-content: center; border-radius: 30px;">Testar 7 Dias Grátis</a>
         </div>
 
         <!-- PLANO 2: PRO -->
         <div class="price-card featured">
-          <div style="position: absolute; top: -12px; right: 20px; background: var(--primary); color: #fff; padding: 2px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">MAIS POPULAR</div>
-          <h3>⚡ Plano Pro</h3>
-          <p style="color: var(--text-muted); font-size: 0.85rem;">Para empresas em crescimento</p>
+          <div style="position: absolute; top: -12px; right: 20px; background: var(--primary); color: #fff; padding: 3px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">MAIS POPULAR</div>
+          <h3 style="font-family: 'Sora', sans-serif;">⚡ Plano Pro</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Para empresas em crescimento</p>
           <div class="price-val" id="pricePro">R$ 89<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
-          <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; font-family: 'Inter', sans-serif;">
             <li>✔ Até 5 Telas Ativas</li>
             <li>✔ Instant Takeover & Print da TV</li>
             <li>✔ Todos os Widgets Dinâmicos</li>
             <li>✔ Suporte Prioritário WhatsApp</li>
           </ul>
-          <a href="login.html?register=true" class="btn-primary" style="width: 100%; justify-content: center;">Assinar Pro ⚡</a>
+          <a href="login.html?register=true" class="btn-primary" style="width: 100%; justify-content: center; border-radius: 30px;">Assinar Pro ⚡</a>
         </div>
 
         <!-- PLANO 3: ENTERPRISE -->
         <div class="price-card">
-          <h3>🏢 Plano Enterprise</h3>
-          <p style="color: var(--text-muted); font-size: 0.85rem;">Para grandes redes e escritórios</p>
+          <h3 style="font-family: 'Sora', sans-serif;">🏢 Plano Enterprise</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Para grandes redes e escritórios</p>
           <div class="price-val" id="priceEnterprise">R$ 199<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
-          <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; font-family: 'Inter', sans-serif;">
             <li>✔ Até 20 Telas Ativas</li>
             <li>✔ Multi-usuários & Relatórios</li>
             <li>✔ API REST para Integrações</li>
             <li>✔ Suporte Dedicado 24/7</li>
           </ul>
-          <a href="login.html?register=true" class="btn-secondary" style="width: 100%; justify-content: center;">Assinar Enterprise</a>
+          <a href="login.html?register=true" class="btn-secondary" style="width: 100%; justify-content: center; border-radius: 30px;">Assinar Enterprise</a>
         </div>
 
         <!-- PLANO 4: MASTER FRANCHISE -->
         <div class="price-card" style="border-color: var(--primary);">
-          <div style="position: absolute; top: -12px; right: 20px; background: var(--primary); color: #fff; padding: 2px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 800;">WHITELABEL</div>
-          <h3>👑 Master Franchise</h3>
-          <p style="color: var(--text-muted); font-size: 0.85rem;">Para redes franqueadoras e agências</p>
+          <div style="position: absolute; top: -12px; right: 20px; background: var(--primary); color: #fff; padding: 3px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 800;">WHITELABEL</div>
+          <h3 style="font-family: 'Sora', sans-serif;">👑 Master Franchise</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Para redes e agências</p>
           <div class="price-val" id="priceMaster">R$ 399<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
-          <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          <ul style="list-style: none; line-height: 2.2; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; font-family: 'Inter', sans-serif;">
             <li>✔ Até 100 Telas + Multi-Loja</li>
             <li>✔ Domínio Próprio & Whitelabel</li>
             <li>✔ Gerente de Conta Exclusivo</li>
             <li>✔ Atendimento VIP 24/7</li>
           </ul>
-          <a href="login.html?register=true" class="btn-primary" style="width: 100%; justify-content: center;">Assinar Master 👑</a>
+          <a href="login.html?register=true" class="btn-primary" style="width: 100%; justify-content: center; border-radius: 30px;">Assinar Master 👑</a>
         </div>
 
       </div>
     </div>
 
-    <!-- MATRIZ COMPARATIVA DE RECURSOS (BENCHMARK SCREENCLOUD) -->
-    <div style="max-width: 1100px; margin: 3rem auto 0; padding: 0 6%;">
-      <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Comparar Todos os Recursos dos Planos</h3>
-      <p style="color: var(--text-muted); margin-bottom: 2rem;">Veja o detalhamento completo de funcionalidades oferecidas em cada plano.</p>
+    <!-- MATRIZ COMPARATIVA DE RECURSOS -->
+    <div style="max-width: 1100px; margin: 4rem auto 0; padding: 0 6%;">
+      <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; font-family: 'Sora', sans-serif;">Comparar Todos os Recursos dos Planos</h3>
+      <p style="color: var(--text-muted); margin-bottom: 2.5rem;">Detalhamento completo das capacidades técnicas oferecidas.</p>
 
       <div class="compare-table-wrapper">
         <table class="compare-table">
@@ -575,8 +615,9 @@
 
   <!-- DÚVIDAS FREQUENTES (FAQ) -->
   <section style="padding: 4rem 6%; max-width: 900px; margin: 0 auto; text-align: center;">
-    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Dúvidas Frequentes</h2>
-    <p style="color: var(--text-muted); margin-bottom: 2rem;">Tudo o que você precisa saber para começar a usar o TvCorp hoje mesmo.</p>
+    <span class="eyebrow-label">SUPPORT & FAQ</span>
+    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem; font-family: 'Sora', sans-serif;">Dúvidas Frequentes</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2.5rem;">Respostas para as dúvidas mais comuns sobre o TvCorp.</p>
 
     <div class="faq-container">
       <div class="faq-card">
@@ -595,7 +636,7 @@
           <span>+</span>
         </button>
         <div class="faq-body">
-          O pagamento é processado com total segurança através do Mercado Pago. Aceitamos ⚡ PIX Instantâneo (QR Code) e 💳 Cartão de Crédito parcelado com liberação imediata.
+          O pagamento é processado com total segurança através do Mercado Pago. Aceitamos ⚡ PIX Instantâneo (QR Code com desconto) e 💳 Cartão de Crédito parcelado com liberação imediata.
         </div>
       </div>
 
@@ -605,29 +646,37 @@
           <span>+</span>
         </button>
         <div class="faq-body">
-          É extremamente simples: ao abrir a URL do player na TV (tvcorp.hubdigital360.com/player/), um código de 6 dígitos é exibido. Você entra no seu painel, clica em "Conectar Nova Tela" e digita o código. A tela é pareada instantaneamente!
+          É extremamente simples: ao abrir a URL do player na TV (tvcorp.hubdigital360.com/player/), um código de 6 dígitos é exibido. Você entra no seu painel, clica em "Conectar Nova Tela" e digita o código. A tela é pareada em menos de 10 segundos!
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER COM MARCA PURA "TvCorp" -->
-  <footer style="border-top: 1px solid var(--border-subtle); padding: 3.5rem 6%; text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 4rem;">
-    <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 1rem;">
-      <span class="logo-dot"></span>
-      <span style="font-weight: 800; color: #fff; font-size: 1.3rem;" class="gradient-text">TvCorp</span>
+  <!-- FOOTER ANORAK BENCHMARK -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 4rem 6%; text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 4rem; background: rgba(3, 2, 12, 0.4);">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 1.25rem;">
+      <img src="assets/images/logo-icon.svg" alt="TvCorp Logo" style="height: 32px; width: auto;">
+      <span style="font-weight: 800; color: #fff; font-size: 1.4rem; font-family: 'Sora', sans-serif;" class="gradient-text">TvCorp</span>
     </div>
-    <p style="margin-bottom: 1rem;">A Plataforma Inteligente de TV Corporativa & Mídia Indoor.</p>
-    <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 1.5rem; flex-wrap: wrap;">
-      <a href="index.html" style="color: var(--text-muted);">Home</a>
-      <a href="#recursos" style="color: var(--text-muted);">Recursos</a>
-      <a href="#planos" style="color: var(--text-muted);">Planos</a>
-      <a href="help.html" style="color: var(--text-muted);">Tutoriais & Ajuda</a>
-      <a href="login.html" style="color: var(--text-muted);">Área do Cliente</a>
-      <a href="admin.html" style="color: var(--text-muted);">Painel Admin</a>
+    <p style="margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; color: var(--text-muted);">
+      Plataforma de Engenharia para Gestão de Smart TVs, Mídia Indoor e TV Corporativa.
+    </p>
+    <div style="display: flex; justify-content: center; gap: 28px; margin-bottom: 2rem; flex-wrap: wrap;">
+      <a href="index.html" style="color: var(--text-muted); text-decoration: none;">Home</a>
+      <a href="#plataformas" style="color: var(--text-muted); text-decoration: none;">Plataformas</a>
+      <a href="#recursos" style="color: var(--text-muted); text-decoration: none;">Recursos</a>
+      <a href="#planos" style="color: var(--text-muted); text-decoration: none;">Planos</a>
+      <a href="help.html" style="color: var(--text-muted); text-decoration: none;">Tutoriais & Ajuda</a>
+      <a href="login.html" style="color: var(--text-muted); text-decoration: none;">Área do Cliente</a>
+      <a href="admin.html" style="color: var(--text-muted); text-decoration: none;">Painel Admin</a>
     </div>
-    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.4);">© 2026 TvCorp. Todos os direitos reservados. Integrado com Mercado Pago API.</p>
+    <p style="font-size: 0.82rem; color: rgba(255,255,255,0.4);">© 2026 TvCorp Studio. Todos os direitos reservados. Integrado com Mercado Pago API.</p>
   </footer>
+
+  <!-- BOTÃO FLUTUANTE BACK TO TOP -->
+  <button id="backToTopBtn" class="back-to-top-btn" onclick="scrollToTop()" aria-label="Voltar ao topo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+  </button>
 
   <script>
     function toggleFaqHome(btn) {
@@ -661,7 +710,7 @@
         if (priceMaster) priceMaster.innerHTML = 'R$ 319<span style="font-size: 1rem; color: var(--text-muted);">/mês no Anual</span>';
       } else {
         btnAnnual.classList.remove('active');
-        btnMonthly.classList.add('active');
+        btnMonthly.classList.active && btnMonthly.classList.add('active');
 
         if (priceStart) priceStart.innerHTML = 'R$ 39<span style="font-size: 1rem; color: var(--text-muted);">/mês</span>';
         if (pricePro) pricePro.innerHTML = 'R$ 89<span style="font-size: 1rem; color: var(--text-muted);">/mês</span>';
@@ -669,7 +718,25 @@
         if (priceMaster) priceMaster.innerHTML = 'R$ 399<span style="font-size: 1rem; color: var(--text-muted);">/mês</span>';
       }
     }
+
+    // BACK TO TOP SCROLL LISTENER
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   </script>
 
 </body>
 </html>
+
