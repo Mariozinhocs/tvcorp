@@ -4,7 +4,7 @@
  */
 header("Content-Type: text/html; charset=UTF-8");
 
-$dbFile = __DIR__ . '/api/tvcorp.sqlite';
+$dbFile = __DIR__ . '/api/tvcorp.db';
 $installed = false;
 $msg = '';
 
@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name VARCHAR(100) NOT NULL,
+            username VARCHAR(100) NULL,
             email VARCHAR(191) NOT NULL UNIQUE,
             password_hash VARCHAR(255) NOT NULL,
             company VARCHAR(100) NULL,
@@ -85,9 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             slide_order INT DEFAULT 0,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );
-        ";
-
         $db->exec($sql);
+
+        // Migração de coluna username para bancos SQLite já existentes
+        try {
+            $db->exec("ALTER TABLE users ADD COLUMN username VARCHAR(100) NULL;");
+        } catch (Exception $e) {}
 
         // Criar ou atualizar contas de administrador padrão (admin & mariozinhocs)
         $defaultAdmins = [
