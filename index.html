@@ -325,24 +325,96 @@
   <section id="demo" style="position: relative; z-index: 1; padding: 5rem 5%; text-align: center; max-width: 1150px; margin: 0 auto;">
     <span class="eyebrow-label">LIVE STUDIO SIMULATOR</span>
     <h2 style="font-size: 2.4rem; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif;">Demonstrador do Player em Tempo Real</h2>
-    <p style="color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 720px; margin-left: auto; margin-right: auto;">Veja como o TvCorp executa comunicados, widgets dinâmicos e vídeos em 4K nativamente no navegador da TV.</p>
+    <p style="color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 720px; margin-left: auto; margin-right: auto;">Veja como o TvCorp executa comunicados, dashboards de KPIs, mídias indoor e tickers RSS em tempo real na TV.</p>
 
     <div class="glass-panel" style="padding: 1.25rem; border-radius: var(--radius-xl); border: 1px solid var(--border-glow); box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
-      <div style="background: #000; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 16/9; position: relative;">
-        <img src="https://images.unsplash.com/photo-1542744094-3a31f103e35f?q=80&w=1200&auto=format&fit=crop" alt="TV Corporativa Demo" style="width: 100%; height: 100%; object-fit: cover;">
+      <div style="background: #070b14; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 16/9; position: relative; border: 1px solid rgba(255,255,255,0.1);">
+        
+        <!-- SLIDES DO PLAYER SIMULADOR -->
+        <div id="playerSlides" style="width: 100%; height: 100%; position: relative;">
+          
+          <!-- SLIDE 1: COMUNICADO CORPORATIVO -->
+          <div class="demo-slide active" style="position: absolute; inset: 0; padding: 3.5rem 4rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; text-align: left; background: linear-gradient(135deg, rgba(13, 20, 36, 0.95), rgba(7, 11, 20, 0.98)); transition: opacity 0.6s ease; opacity: 1;">
+            <div style="background: rgba(0, 242, 254, 0.15); border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">
+              📢 Endomarketing & Comunicação
+            </div>
+            <h3 style="font-size: clamp(1.5rem, 3vw, 2.4rem); color: #fff; font-family: 'Space Grotesk', sans-serif; margin-bottom: 0.75rem; line-height: 1.2;">
+              Reunião Geral de Alinhamento & Metas 2026
+            </h3>
+            <p style="color: var(--text-secondary); font-size: clamp(0.9rem, 1.5vw, 1.15rem); max-width: 680px; margin-bottom: 1.5rem; line-height: 1.6;">
+              Toda a equipe convidada para o auditório principal hoje às 16h. Apresentação dos resultados do trimestre e premiação Destaque do Mês.
+            </p>
+            <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+              <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 10px; color: #fff; font-size: 0.9rem; font-weight: 600;">⏰ Hoje às 16:00</span>
+              <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 10px; color: #fff; font-size: 0.9rem; font-weight: 600;">📍 Auditório Central</span>
+            </div>
+          </div>
+
+          <!-- SLIDE 2: DASHBOARD DE KPIS E METAS -->
+          <div class="demo-slide" style="position: absolute; inset: 0; padding: 3rem 4rem; display: flex; flex-direction: column; justify-content: center; text-align: left; background: linear-gradient(135deg, rgba(10, 15, 29, 0.95), rgba(5, 8, 17, 0.98)); opacity: 0; transition: opacity 0.6s ease; pointer-events: none;">
+            <div style="background: rgba(138, 43, 226, 0.15); border: 1px solid var(--accent-purple); color: #c2bdfc; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-block; width: fit-content;">
+              📊 Indicadores de Desempenho (KPIs)
+            </div>
+            <h3 style="font-size: clamp(1.4rem, 2.5vw, 2.1rem); color: #fff; font-family: 'Space Grotesk', sans-serif; margin-bottom: 1.25rem;">
+              Metas da Operação em Tempo Real
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; width: 100%;">
+              <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 16px; border-radius: 12px;">
+                <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">Vendas Mês</span>
+                <span style="font-size: 1.6rem; font-weight: 800; color: #10b981; font-family: 'Space Grotesk', sans-serif;">R$ 485K</span>
+                <span style="font-size: 0.75rem; color: #10b981;">▲ +18.4% vs meta</span>
+              </div>
+              <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 16px; border-radius: 12px;">
+                <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">SLA Atendimento</span>
+                <span style="font-size: 1.6rem; font-weight: 800; color: var(--primary-cyan); font-family: 'Space Grotesk', sans-serif;">99.4%</span>
+                <span style="font-size: 0.75rem; color: var(--primary-cyan);">★ Excelente</span>
+              </div>
+              <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 16px; border-radius: 12px;">
+                <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">NPS Clientes</span>
+                <span style="font-size: 1.6rem; font-weight: 800; color: #f59e0b; font-family: 'Space Grotesk', sans-serif;">94 pts</span>
+                <span style="font-size: 0.75rem; color: #f59e0b;">● Zona de Excelência</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 3: MÍDIA INDOOR & PROMOÇÃO VAREJO -->
+          <div class="demo-slide" style="position: absolute; inset: 0; padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; text-align: left; background: linear-gradient(135deg, rgba(20, 10, 35, 0.95), rgba(7, 11, 20, 0.98)); opacity: 0; transition: opacity 0.6s ease; pointer-events: none;">
+            <div style="max-width: 65%;">
+              <div style="background: rgba(244, 63, 94, 0.15); border: 1px solid #f43f5e; color: #f43f5e; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-block;">
+                🛍️ Mídia Indoor & Ofertas
+              </div>
+              <h3 style="font-size: clamp(1.4rem, 2.5vw, 2.2rem); color: #fff; font-family: 'Space Grotesk', sans-serif; margin-bottom: 0.75rem;">
+                Oferta Relâmpago de Primavera
+              </h3>
+              <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.25rem;">
+                Aproveite até 30% de desconto em toda a linha de produtos corporativos selecionados.
+              </p>
+              <span style="background: linear-gradient(135deg, var(--primary-cyan), var(--accent-purple)); color: #fff; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; display: inline-block;">
+                CÓDIGO: TVCORP30
+              </span>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); padding: 16px; border-radius: 16px; text-align: center;">
+              <div style="width: 100px; height: 100px; background: #fff; padding: 8px; border-radius: 8px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
+                <svg width="84" height="84" viewBox="0 0 24 24" fill="#000"><path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm8-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm10-2h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2zm-2-2h2v2h-2v-2zm-2 4h2v2h-2v-2zm4 0h2v2h-2v-2z"/></svg>
+              </div>
+              <span style="font-size: 0.75rem; color: var(--primary-cyan); font-weight: 700;">Aponte a Câmera 📱</span>
+            </div>
+          </div>
+
+        </div>
         
         <!-- WIDGET SUPERIOR DE HORA E CLIMA -->
-        <div style="position: absolute; top: 20px; right: 20px; background: rgba(5, 8, 17, 0.9); backdrop-filter: blur(10px); padding: 8px 18px; border-radius: 30px; border: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 12px;">
+        <div style="position: absolute; top: 20px; right: 20px; background: rgba(5, 8, 17, 0.9); backdrop-filter: blur(10px); padding: 8px 18px; border-radius: 30px; border: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 12px; z-index: 10;">
           <span style="font-size: 0.82rem; color: var(--primary-cyan); font-weight: 700;">☀️ 28°C São Paulo</span>
           <span style="color: rgba(255,255,255,0.2);">|</span>
-          <span style="font-size: 0.82rem; color: #fff; font-weight: 600;">⏰ 12:15</span>
+          <span style="font-size: 0.82rem; color: #fff; font-weight: 600;" id="demoClock">12:15</span>
         </div>
 
         <!-- OVERLAY DE TICKER DE NOTÍCIAS RSS AO VIVO -->
-        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(5, 8, 17, 0.95); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle);">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(5, 8, 17, 0.95); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); z-index: 10;">
           <div style="display: flex; align-items: center; gap: 12px;">
             <span style="background: linear-gradient(135deg, var(--primary-cyan), var(--accent-purple)); color: #fff; padding: 4px 14px; border-radius: 20px; font-weight: 800; font-size: 0.75rem;">AO VIVO</span>
-            <span style="font-weight: 600; color: #fff; font-size: 0.95rem;">📢 COMUNICADO DA DIRETORIA: Reunião Geral de Alinhamento e Metas às 16h</span>
+            <span style="font-weight: 600; color: #fff; font-size: 0.92rem;">📢 COMUNICADO DA DIRETORIA: Reunião Geral de Alinhamento e Metas às 16h</span>
           </div>
           <span class="badge-status online">🟢 PLAYER ONLINE (1080p 60FPS)</span>
         </div>
@@ -801,6 +873,33 @@
         if (priceMaster) priceMaster.innerHTML = `<span class="currency">R$</span>399<span class="period">${periodText}</span>`;
       }
     }
+
+    // SIMULADOR LIVE SLIDES & CLOCK
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.demo-slide');
+    
+    function rotateDemoSlides() {
+      if (!slides.length) return;
+      slides.forEach(s => {
+        s.style.opacity = '0';
+        s.style.pointerEvents = 'none';
+      });
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].style.opacity = '1';
+      slides[currentSlide].style.pointerEvents = 'auto';
+    }
+    setInterval(rotateDemoSlides, 5000);
+
+    function updateDemoClock() {
+      const clockEl = document.getElementById('demoClock');
+      if (!clockEl) return;
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      clockEl.innerText = `${h}:${m}`;
+    }
+    setInterval(updateDemoClock, 1000);
+    updateDemoClock();
 
     // BACK TO TOP SCROLL LISTENER (VISÍVEL AO ROLAR > 100PX)
     const backToTopBtn = document.getElementById('backToTopBtn');
