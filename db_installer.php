@@ -89,12 +89,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $db->exec($sql);
 
-        // Se a tabela users estiver vazia, cria a conta admin padrão
-        $stmt = $db->query("SELECT COUNT(*) as count FROM users");
-        if ($stmt->fetch()['count'] == 0) {
-            $passHash = password_hash('admin2026', PASSWORD_BCRYPT);
-            $stmtInsert = $db->prepare("INSERT INTO users (name, email, password_hash, company, role) VALUES (?, ?, ?, ?, ?)");
-            $stmtInsert->execute(['Administrador TvCorp', 'admin@tvcorp.com', $passHash, 'TvCorp Inc', 'admin']);
+        // Criar ou atualizar contas de administrador padrão (admin & mariozinhocs)
+        $defaultAdmins = [
+            [
+                'name' => 'admin',
+                'username' => 'admin',
+                'email' => 'eu.anorak@gmail.com',
+                'password' => 'admin2026',
+                'company' => 'Anorak Technology'
+            ],
+            [
+                'name' => 'mariozinhocs',
+                'username' => 'mariozinhocs',
+                'email' => 'mariozinhocs@gmail.com',
+                'password' => 'admin2026',
+                'company' => 'TvCorp / Anorak'
+            ]
+        ];
+
+        foreach ($defaultAdmins as $adm) {
+            $stmtUser = $db->prepare("SELECT id FROM users WHERE email = ? OR username = ?");
+            $stmtUser->execute([$adm['email'], $adm['username']]);
+            $existing = $stmtUser->fetch();
+
+            if (!$existing) {
+                $passHash = password_hash($adm['password'], PASSWORD_BCRYPT);
+                $stmtInsert = $db->prepare("INSERT INTO users (name, username, email, password_hash, company, role) VALUES (?, ?, ?, ?, ?, 'admin')");
+                $stmtInsert->execute([$adm['name'], $adm['username'], $adm['email'], $passHash, $adm['company']]);
+                $uId = $db->lastInsertId();
+
+                $stmtSub = $db->prepare("INSERT INTO subscriptions (user_id, plan_name, screen_limit, status, expires_at) VALUES (?, 'LEGEND (Permanente)', 100, 'active', '2099-12-31 23:59:59')");
+                $stmtSub->execute([$uId]);
+            }
         }
 
         // Se a tabela home_ads estiver vazia, popula com anúncios de exemplo padrão

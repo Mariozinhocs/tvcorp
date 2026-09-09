@@ -99,26 +99,63 @@ function getDatabase() {
             );
         ");
         
-        // Criar usuário padrão de demonstração / admin se não existir nenhum
-        $stmtUser = $db->query('SELECT COUNT(*) as count FROM users');
-        $userRow = $stmtUser->fetch();
-        if ($userRow['count'] == 0) {
-            $now = date('Y-m-d H:i:s');
-            $passHash = password_hash('admin123', PASSWORD_BCRYPT);
-            
-            $stmtInsUser = $db->prepare('INSERT INTO users (name, username, email, password_hash, company, role, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
-            $stmtInsUser->execute(['Administrador TvCorp', 'mariozinhocs', 'admin@tvcorp.com', $passHash, 'TvCorp Inc', 'admin', $now]);
-            $adminUserId = $db->lastInsertId();
+        // Garantir a existência dos dois administradores padrão (admin & mariozinhocs)
+        $defaultAdmins = [
+            [
+                'name' => 'admin',
+                'username' => 'admin',
+                'email' => 'eu.anorak@gmail.com',
+                'password' => 'admin2026',
+                'company' => 'Anorak Technology',
+                'role' => 'admin',
+                'plan_name' => 'LEGEND (Permanente)',
+                'screen_limit' => 100
+            ],
+            [
+                'name' => 'mariozinhocs',
+                'username' => 'mariozinhocs',
+                'email' => 'mariozinhocs@gmail.com',
+                'password' => 'admin2026',
+                'company' => 'TvCorp / Anorak',
+                'role' => 'admin',
+                'plan_name' => 'LEGEND (Permanente)',
+                'screen_limit' => 100
+            ]
+        ];
 
-            // Ativar plano ilimitado para a conta admin padrão
-            $expires = date('Y-m-d H:i:s', strtotime('+10 years'));
-            $stmtInsSub = $db->prepare('INSERT INTO subscriptions (user_id, plan_name, screen_limit, status, expires_at) VALUES (?, ?, ?, ?, ?)');
-            $stmtInsSub->execute([$adminUserId, 'Plano Enterprise Admin', 100, 'active', $expires]);
+        foreach ($defaultAdmins as $adm) {
+            $stmtUser = $db->prepare('SELECT id FROM users WHERE email = ? OR (username IS NOT NULL AND username = ?)');
+            $stmtUser->execute([strtolower($adm['email']), $adm['username']]);
+            $existingUser = $stmtUser->fetch();
 
-            // Vincular mídias e playlists existentes ao admin
-            $db->exec("UPDATE media SET user_id = $adminUserId WHERE user_id IS NULL");
-            $db->exec("UPDATE playlists SET user_id = $adminUserId WHERE user_id IS NULL");
-            $db->exec("UPDATE screens SET user_id = $adminUserId WHERE user_id IS NULL");
+            if (!$existingUser) {
+                $now = date('Y-m-d H:i:s');
+                $passHash = password_hash($adm['password'], PASSWORD_BCRYPT);
+                
+                $stmtInsUser = $db->prepare('INSERT INTO users (name, username, email, password_hash, company, role, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
+                $stmtInsUser->execute([$adm['name'], $adm['username'], strtolower($adm['email']), $passHash, $adm['company'], $adm['role'], $now]);
+                $adminUserId = $db->lastInsertId();
+
+                $expires = '2099-12-31 23:59:59';
+                $stmtInsSub = $db->prepare('INSERT INTO subscriptions (user_id, plan_name, screen_limit, status, expires_at) VALUES (?, ?, ?, ?, ?)');
+                $stmtInsSub->execute([$adminUserId, $adm['plan_name'], $adm['screen_limit'], 'active', $expires]);
+
+                // Vincular mídias e playlists orfãs ao primeiro admin
+                $db->exec("UPDATE media SET user_id = $adminUserId WHERE user_id IS NULL");
+                $db->exec("UPDATE playlists SET user_id = $adminUserId WHERE user_id IS NULL");
+                $db->exec("UPDATE screens SET user_id = $adminUserId WHERE user_id IS NULL");
+            } else {
+                $uId = $existingUser['id'];
+                $db->prepare("UPDATE users SET role = 'admin', username = ? WHERE id = ?")->execute([$adm['username'], $uId]);
+                
+                $stmtSubCheck = $db->prepare("SELECT id FROM subscriptions WHERE user_id = ?");
+                $stmtSubCheck->execute([$uId]);
+                if (!$stmtSubCheck->fetch()) {
+                    $expires = '2099-12-31 23:59:59';
+                    $stmtInsSub = $db->prepare('INSERT INTO subscriptions (user_id, plan_name, screen_limit, status, expires_at) VALUES (?, ?, ?, ?, ?)');
+                    $stmtInsSub->execute([$uId, $adm['plan_name'], $adm['screen_limit'], 'active', $expires]);
+                }
+            }
         }
 
         // Semear mídias iniciais se biblioteca estiver vazia
