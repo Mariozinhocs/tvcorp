@@ -1,7 +1,7 @@
 # Memória do Projeto: TvCorp — Plataforma SaaS de TV Corporativa
 
 > **Status Atual:** 100% Operacional (Benchmark ScreenCloud & 360Studio)  
-> **Última Atualização:** 08 de Setembro de 2026  
+> **Última Atualização:** 09 de Setembro de 2026  
 > **Squad:** A-Team (PO: Product Owner / Agent: Antigravity AI)  
 > **Tagline Oficial:** *"TvCorp — Transforme Suas Smart TVs em Hubs de Comunicação e Mídia Indoor"*
 
@@ -23,7 +23,7 @@ O **TvCorp** é a plataforma inteligente para Gestão de Mídia Indoor, TV Corpo
    * **Menu Superior Alinhado Glassmorphic (Fixado no Topo):** Links para *Plataformas*, *Engenharia & Recursos*, *Casos de Uso*, *Planos*, *Tutoriais & Ajuda*, *Entrar*, *Testar 7 Dias Grátis* e botão flutuante *Back to Top*.
    * **Hero Section Anorak Benchmark:** Eyebrow pill badge (`⚡ SMART TV & DIGITAL SIGNAGE PLATFORM`), título de alta conversão, subtítulo focado em estabilidade (Offline-first, <3s atualização) e barra de ecossistema de hardware (Samsung Tizen, LG webOS, Android TV, Fire TV, Windows).
    * **Barra de Estatísticas chave:** `99.9% Disponibilidade`, `< 3s Atualização Remota`, `100% Nuvem e Offline-First`.
-   * **Simulador de TV em Tempo Real (Studio CMS):** Renderização de comunicados, widgets RSS ao vivo, hora certa e clima tempo local.
+   * **Simulador de TV em Tempo Real (Live Studio CMS Simulator):** Player animado nativo em CSS/JS com rotação automática de 3 slides (Endomarketing, Dashboard de KPIs e Mídia Indoor com QR Code), relógio ao vivo, clima local e ticker RSS.
    * **Grid de Recursos & Engenharia Anorak:** Pareamento 6 dígitos, Agendamento Inteligente (Smart Scheduling), Feeds RSS/Clima, Instant Takeover de emergência, Print remoto/Proof of Play e Gestão Multi-lojas.
    * **Casos de Uso por Indústria:** Escritórios & Endomarketing, Varejo & Mídia Indoor, Lobbies & Recepções, Indústria & Dashboards.
    * **Seção de Planos 360Studio + Matriz Comparativa Detalhada:** Seletor Mensal / Anual (-20% desc), 4 Cards (*Start*, *Pro*, *Enterprise*, *Master Franchise*) e Tabela Comparativa de Recursos estilo ScreenCloud/Anorak.
