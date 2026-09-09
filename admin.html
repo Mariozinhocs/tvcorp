@@ -187,8 +187,103 @@
     </div>
   </div>
 
+  <!-- SEÇÃO DE GESTÃO DE PUBLICIDADES DA HOME (LIVE CMS SIMULATOR) -->
+  <div class="glass-panel" style="padding: 1.75rem; border-radius: var(--radius-lg); margin-top: 2.25rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <h3 style="font-size: 1.25rem; margin: 0; font-family: var(--font-heading);" class="gradient-text">📺 Gestão de Publicidades da Home (Live CMS Simulator)</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin: 4px 0 0 0;">Gerencie os anúncios e comunicados dinâmicos que circulam no simulador do Player da Landing Page.</p>
+      </div>
+      <button class="btn-primary" onclick="openHomeAdModal()">+ Novo Anúncio da Home</button>
+    </div>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Ordem</th>
+            <th>Badge / Categoria</th>
+            <th>Título da Publicidade</th>
+            <th>Descrição</th>
+            <th>Tags</th>
+            <th>QR Code</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="homeAdsTableBody">
+          <tr>
+            <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+              Carregando anúncios da Home...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MODAL DE CADASTRO / EDIÇÃO DE ANÚNCIO DA HOME -->
+  <div id="homeAdModal" style="display: none; position: fixed; inset: 0; background: rgba(5, 8, 17, 0.85); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="glass-panel" style="max-width: 560px; width: 100%; padding: 2rem; border-radius: var(--radius-lg); position: relative; max-height: 90vh; overflow-y: auto;">
+      <h3 id="modalAdTitle" style="font-size: 1.3rem; margin-bottom: 1.25rem; font-family: var(--font-heading);" class="gradient-text">Novo Anúncio da Home</h3>
+      <form id="homeAdForm" onsubmit="saveHomeAd(event)">
+        <input type="hidden" id="adId" value="0">
+        
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">Badge / Categoria</label>
+          <input type="text" id="adBadge" placeholder="Ex: 📢 Endomarketing &amp; Comunicação" required style="width: 100%; padding: 10px 14px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); color: #fff; outline: none;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">Título da Publicidade</label>
+          <input type="text" id="adTitle" placeholder="Ex: Reunião Geral de Alinhamento &amp; Metas" required style="width: 100%; padding: 10px 14px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); color: #fff; outline: none;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">Descrição Detalhada</label>
+          <textarea id="adDescription" rows="3" placeholder="Descrição do anúncio exibido na tela..." required style="width: 100%; padding: 10px 14px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); color: #fff; outline: none; resize: vertical;"></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">Tag Destaque 1</label>
+            <input type="text" id="adTag1" placeholder="Ex: ⏰ Hoje às 16:00" style="width: 100%; padding: 10px 14px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); color: #fff; outline: none;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">Tag Destaque 2</label>
+            <input type="text" id="adTag2" placeholder="Ex: 📍 Auditório Central" style="width: 100%; padding: 10px 14px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); color: #fff; outline: none;">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; align-items: center;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">Ordem do Slide</label>
+            <input type="number" id="adOrder" value="1" min="1" style="width: 100%; padding: 10px 14px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); color: #fff; outline: none;">
+          </div>
+          <div style="padding-top: 20px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer; color: #fff;">
+              <input type="checkbox" id="adShowQr" style="width: 18px; height: 18px; accent-color: var(--primary-cyan);" onchange="toggleQrField()"> Exibir QR Code
+            </label>
+          </div>
+        </div>
+
+        <div id="qrGroup" style="display: none; margin-bottom: 1.25rem;">
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">Texto / Link / Cupom do QR Code</label>
+          <input type="text" id="adQrCodeText" placeholder="Ex: TVCORP30 ou https://..." style="width: 100%; padding: 10px 14px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); color: #fff; outline: none;">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 1.5rem;">
+          <button type="button" class="btn-secondary" onclick="closeHomeAdModal()">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar Anúncio 💾</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
-    window.addEventListener('DOMContentLoaded', loadAdminData);
+    window.addEventListener('DOMContentLoaded', () => {
+      loadAdminData();
+      loadHomeAds();
+    });
 
     async function loadAdminData() {
       const search = document.getElementById('searchInput').value.trim();
@@ -326,6 +421,149 @@
           loadAdminData();
         } else {
           alert(data.error || 'Erro ao alterar status');
+        }
+      } catch (err) {
+        alert('Erro de comunicação com o servidor');
+      }
+    }
+
+    async function loadHomeAds() {
+      try {
+        const res = await fetch('api/admin.php?action=get_home_ads');
+        const data = await res.json();
+        if (res.ok && data.success) {
+          renderHomeAdsTable(data.ads);
+        } else {
+          console.error(data.error);
+        }
+      } catch (err) {
+        console.error('Erro ao carregar anúncios da home:', err);
+      }
+    }
+
+    function renderHomeAdsTable(ads) {
+      const tbody = document.getElementById('homeAdsTableBody');
+      if (!tbody) return;
+
+      if (!ads || ads.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+              Nenhum anúncio cadastrado para o simulador da Home.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = ads.map(a => `
+        <tr>
+          <td>#${a.id}</td>
+          <td><strong style="color: var(--primary-cyan);">${a.slide_order}</strong></td>
+          <td><span style="background: rgba(0, 242, 254, 0.1); color: var(--primary-cyan); padding: 2px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">${escapeHTML(a.badge)}</span></td>
+          <td><strong>${escapeHTML(a.title)}</strong></td>
+          <td style="color: var(--text-muted); font-size: 0.85rem; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${escapeHTML(a.description)}">${escapeHTML(a.description)}</td>
+          <td>
+            <div style="font-size: 0.75rem; color: var(--text-secondary);">
+              ${a.tag_1 ? `<span>${escapeHTML(a.tag_1)}</span>` : ''}
+              ${a.tag_2 ? `<span style="margin-left: 4px;">${escapeHTML(a.tag_2)}</span>` : ''}
+            </div>
+          </td>
+          <td>${a.show_qr == 1 ? `📱 <span style="font-size: 0.8rem; color: var(--accent-emerald); font-weight: 600;">${escapeHTML(a.qr_code_text || 'Sim')}</span>` : '<span style="color: var(--text-muted);">Não</span>'}</td>
+          <td>
+            <div class="action-btn-group">
+              <button class="btn-secondary btn-xs" onclick='editHomeAd(${JSON.stringify(a).replace(/'/g, "&apos;")})'>✏️ Editar</button>
+              <button class="btn-secondary btn-xs" style="color: #ff3b30;" onclick="deleteHomeAd(${a.id})">🗑️ Excluir</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openHomeAdModal() {
+      const modal = document.getElementById('homeAdModal');
+      const title = document.getElementById('modalAdTitle');
+      title.innerText = 'Novo Anúncio da Home';
+      document.getElementById('adId').value = '0';
+      document.getElementById('homeAdForm').reset();
+      document.getElementById('adOrder').value = (document.querySelectorAll('#homeAdsTableBody tr').length + 1);
+      toggleQrField();
+      modal.style.display = 'flex';
+    }
+
+    function editHomeAd(a) {
+      const modal = document.getElementById('homeAdModal');
+      const title = document.getElementById('modalAdTitle');
+      title.innerText = 'Editar Anúncio da Home';
+      document.getElementById('adId').value = a.id;
+      document.getElementById('adBadge').value = a.badge || '';
+      document.getElementById('adTitle').value = a.title || '';
+      document.getElementById('adDescription').value = a.description || '';
+      document.getElementById('adTag1').value = a.tag_1 || '';
+      document.getElementById('adTag2').value = a.tag_2 || '';
+      document.getElementById('adOrder').value = a.slide_order || 1;
+      document.getElementById('adShowQr').checked = a.show_qr == 1;
+      document.getElementById('adQrCodeText').value = a.qr_code_text || '';
+      toggleQrField();
+      modal.style.display = 'flex';
+    }
+
+    function closeHomeAdModal() {
+      document.getElementById('homeAdModal').style.display = 'none';
+    }
+
+    function toggleQrField() {
+      const showQr = document.getElementById('adShowQr').checked;
+      document.getElementById('qrGroup').style.display = showQr ? 'block' : 'none';
+    }
+
+    async function saveHomeAd(event) {
+      event.preventDefault();
+      const id = parseInt(document.getElementById('adId').value) || 0;
+      const badge = document.getElementById('adBadge').value.trim();
+      const title = document.getElementById('adTitle').value.trim();
+      const description = document.getElementById('adDescription').value.trim();
+      const tag_1 = document.getElementById('adTag1').value.trim();
+      const tag_2 = document.getElementById('adTag2').value.trim();
+      const slide_order = parseInt(document.getElementById('adOrder').value) || 1;
+      const show_qr = document.getElementById('adShowQr').checked ? 1 : 0;
+      const qr_code_text = document.getElementById('adQrCodeText').value.trim();
+
+      try {
+        const res = await fetch('api/admin.php?action=save_home_ad', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id, badge, title, description, tag_1, tag_2, slide_order, show_qr, qr_code_text
+          })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          alert(data.message);
+          closeHomeAdModal();
+          loadHomeAds();
+        } else {
+          alert(data.error || 'Erro ao salvar anúncio');
+        }
+      } catch (err) {
+        alert('Erro de comunicação com o servidor');
+      }
+    }
+
+    async function deleteHomeAd(id) {
+      if (!confirm('Tem certeza que deseja excluir este anúncio da Home?')) return;
+      try {
+        const res = await fetch('api/admin.php?action=delete_home_ad', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          alert(data.message);
+          loadHomeAds();
+        } else {
+          alert(data.error || 'Erro ao excluir anúncio');
         }
       } catch (err) {
         alert('Erro de comunicação com o servidor');

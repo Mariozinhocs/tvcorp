@@ -876,9 +876,78 @@
 
     // SIMULADOR LIVE SLIDES & CLOCK
     let currentSlide = 0;
-    const slides = document.querySelectorAll('.demo-slide');
     
+    async function loadDynamicHomeAds() {
+      try {
+        const res = await fetch('api/admin.php?action=get_home_ads');
+        const data = await res.json();
+        if (res.ok && data.success && data.ads && data.ads.length > 0) {
+          renderDynamicHomeSlides(data.ads);
+        }
+      } catch (e) {
+        console.log('Mantendo slides estáticos padrão do simulador.');
+      }
+    }
+
+    function renderDynamicHomeSlides(ads) {
+      const container = document.getElementById('playerSlides');
+      if (!container) return;
+
+      const gradients = [
+        'linear-gradient(135deg, rgba(13, 20, 36, 0.95), rgba(7, 11, 20, 0.98))',
+        'linear-gradient(135deg, rgba(10, 15, 29, 0.95), rgba(5, 8, 17, 0.98))',
+        'linear-gradient(135deg, rgba(20, 10, 35, 0.95), rgba(7, 11, 20, 0.98))'
+      ];
+      const badgeStyles = [
+        'background: rgba(0, 242, 254, 0.15); border: 1px solid var(--primary-cyan); color: var(--primary-cyan);',
+        'background: rgba(138, 43, 226, 0.15); border: 1px solid var(--accent-purple); color: #c2bdfc;',
+        'background: rgba(244, 63, 94, 0.15); border: 1px solid #f43f5e; color: #f43f5e;'
+      ];
+
+      container.innerHTML = ads.map((ad, idx) => {
+        const bgGrad = gradients[idx % gradients.length];
+        const bStyle = badgeStyles[idx % badgeStyles.length];
+        const isFirst = idx === 0;
+
+        const hasQr = ad.show_qr == 1 || (ad.qr_code_text && ad.qr_code_text.trim() !== '');
+
+        return `
+          <div class="demo-slide ${isFirst ? 'active' : ''}" style="position: absolute; inset: 0; padding: 3rem 4rem; display: flex; ${hasQr ? 'align-items: center; justify-content: space-between;' : 'flex-direction: column; justify-content: center; align-items: flex-start;'} text-align: left; background: ${bgGrad}; transition: opacity 0.6s ease; opacity: ${isFirst ? 1 : 0}; pointer-events: ${isFirst ? 'auto' : 'none'};">
+            <div style="${hasQr ? 'max-width: 65%;' : 'width: 100%;'}">
+              <div style="${bStyle} padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-block;">
+                ${escapeHTML(ad.badge)}
+              </div>
+              <h3 style="font-size: clamp(1.4rem, 2.5vw, 2.2rem); color: #fff; font-family: 'Space Grotesk', sans-serif; margin-bottom: 0.75rem; line-height: 1.2;">
+                ${escapeHTML(ad.title)}
+              </h3>
+              <p style="color: var(--text-secondary); font-size: clamp(0.9rem, 1.4vw, 1.1rem); max-width: 680px; margin-bottom: 1.25rem; line-height: 1.6;">
+                ${escapeHTML(ad.description)}
+              </p>
+              ${(ad.tag_1 || ad.tag_2) ? `
+                <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                  ${ad.tag_1 ? `<span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 10px; color: #fff; font-size: 0.9rem; font-weight: 600;">${escapeHTML(ad.tag_1)}</span>` : ''}
+                  ${ad.tag_2 ? `<span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 10px; color: #fff; font-size: 0.9rem; font-weight: 600;">${escapeHTML(ad.tag_2)}</span>` : ''}
+                </div>
+              ` : ''}
+            </div>
+
+            ${hasQr ? `
+              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); padding: 16px; border-radius: 16px; text-align: center;">
+                <div style="width: 100px; height: 100px; background: #fff; padding: 8px; border-radius: 8px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
+                  <svg width="84" height="84" viewBox="0 0 24 24" fill="#000"><path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm8-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm10-2h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2zm-2-2h2v2h-2v-2zm-2 4h2v2h-2v-2zm4 0h2v2h-2v-2z"/></svg>
+                </div>
+                <span style="font-size: 0.75rem; color: var(--primary-cyan); font-weight: 700;">${escapeHTML(ad.qr_code_text || 'Aponte a Câmera 📱')}</span>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+      
+      currentSlide = 0;
+    }
+
     function rotateDemoSlides() {
+      const slides = document.querySelectorAll('.demo-slide');
       if (!slides.length) return;
       slides.forEach(s => {
         s.style.opacity = '0';
@@ -888,6 +957,8 @@
       slides[currentSlide].style.opacity = '1';
       slides[currentSlide].style.pointerEvents = 'auto';
     }
+
+    window.addEventListener('DOMContentLoaded', loadDynamicHomeAds);
     setInterval(rotateDemoSlides, 5000);
 
     function updateDemoClock() {
