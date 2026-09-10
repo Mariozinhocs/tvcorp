@@ -296,6 +296,30 @@
         </ul>
       </div>
 
+      <!-- CARD 5 (NOVO: FEEDS RSS) -->
+      <div class="tutorial-card">
+        <span class="tutorial-badge" style="background: rgba(6, 182, 212, 0.15); color: #67e8f9;">Notícias & RSS</span>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">5. Como Usar Feeds RSS & Notícias ao Vivo</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Mantenha as telas dinâmicas e atualizadas com notícias automáticas em tempo real.</p>
+        <ul class="steps-list">
+          <li>Na aba <strong>Playlists & Mídias</strong>, adicione um item do tipo <strong>Feed / Website</strong>.</li>
+          <li>Cole o link do RSS de notícias desejado (ex: G1, Folha, CNN, Exame, Canaltech ou RSS do blog da empresa).</li>
+          <li>Defina o tempo de exibição (ex: 15s) e adicione à programação da TV.</li>
+        </ul>
+      </div>
+
+      <!-- CARD 6 (NOVO: MODO KIOSK E AUTOSTART) -->
+      <div class="tutorial-card">
+        <span class="tutorial-badge" style="background: rgba(16, 185, 129, 0.15); color: #6ee7b7;">Automação & Kiosk</span>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">6. Ligar a TV Direto no Player (Modo Kiosk)</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Configure sua TV Box ou Smart TV para iniciar o player automaticamente ao ligar na tomada.</p>
+        <ul class="steps-list">
+          <li><strong>TV Box Android:</strong> Instale o app <em>Fully Kiosk Browser</em> ou <em>Launch on Boot</em> e marque "Autostart on Boot".</li>
+          <li><strong>Samsung Tizen:</strong> Em <em>Configurações > Recursos Smart</em>, ative "Executar automaticamente o último app".</li>
+          <li><strong>LG webOS:</strong> Ative o <em>Início Rápido+ (Quick Start+)</em> com o navegador salvo na tela cheia.</li>
+        </ul>
+      </div>
+
     </div>
 
     <!-- SEÇÃO FAQ -->
@@ -320,6 +344,26 @@
         </button>
         <div class="faq-answer">
           O player TvCorp possui cache offline inteligente. A playlist carregada continua sendo exibida em loop contínuo mesmo que a conexão com a internet oscile ou caia temporariamente.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Como fazer a TV ligar direto no player sem usar controle remoto?
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          Basta usar uma TV Box Android conectada com o aplicativo <strong>Fully Kiosk Browser</strong> ou <strong>Launch on Boot</strong> configurado para abrir a URL <code>tvcorp.hubdigital360.com/player/</code> no boot. Dessa forma, caso haja queda de energia, o aparelho liga e volta direto para a exibição de mídia.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Posso usar notícias do G1, UOL ou RSS interno da minha empresa?
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          Sim! Você pode cadastrar qualquer URL de Feed RSS público (G1, CNN, UOL, Reuters) ou o RSS do portal de notícias interno da sua empresa. O sistema converte os dados e exibe manchetes, resumos e fotos atualizadas na sua TV.
         </div>
       </div>
     </div>
